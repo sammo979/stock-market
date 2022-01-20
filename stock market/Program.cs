@@ -1,193 +1,172 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace stock_market
 {
     class Program
     {
-        
         static void Main(string[] args)
         {
-            int end_game = 0, end_turn = 0, x = 0;
-            Market sm = new Market();
+            //intallizing variables
+            int end_game = 0, end_turn = 0, x, choice;
+            Market sm = new Market();//making an instance of the class market to use for the game
             Console.WriteLine("Welcome to Stock Market the board game!\n");
-            Console.WriteLine("How many players are going to play?\n");
+            Console.WriteLine("How many players are going to play?\n"); // finding out the number of players
             int size = Convert.ToInt32(Console.ReadLine());
-            Player[] players = new Player[size];
-            /*Start_Board Prospector = new Start_Board(1);
-            Start_Board Policeman = new Start_Board(2);
-            Start_Board Doctor = new Start_Board(3);
-            Start_Board Deep_Sea_Diver = new Start_Board(4);
-            Board start1 = new Board(1);
-            Board one = new Board(2); 
-            Board two = new Board(3); 
-            Board three = new Board(4); 
-            Board four = new Board(5); 
-            Board five = new Board(6); 
-            Board six = new Board(7); 
-            Board seven = new Board(8); 
-            Board eight = new Board(9); 
-            Board nine = new Board(10); 
-            Board ten = new Board(11); 
-            Board eleven = new Board(12); 
-            Board start2 = new Board(13); 
-            Board twelve = new Board(14); 
-            Board fourteen = new Board(15); 
-            Board fifthteen = new Board(16);
-            Board sixteen = new Board(17);
-            Board seventeen = new Board(18);
-            Board eighteen = new Board(19); 
-            Board nineteen = new Board(20); 
-            Board twenty_one = new Board(21); 
-            Board twenty_two = new Board(22); 
-            Board twenty_three = new Board(23); 
-            Board twenty_four = new Board(24);
-            Board start3 = new Board(25);
-            Board twenty_six = new Board(26);
-            Board twenty_seven = new Board(27);
-            Board twenty_eight = new Board(28);
-            Board twenty_nine = new Board(29);
-            Board thirty_one = new Board(30);
-            Board thirty_two = new Board(31);
-            Board thirty_three = new Board(32);
-            Board thirty_four = new Board(33);
-            Board thirty_five = new Board(34);
-            Board thirty_six = new Board(35);
-            Board thirty_seven = new Board(36);
-            Board start4 = new Board(37); 
-            Board thirty_nine = new Board(38); 
-            Board fourty = new Board(39);
-            Board fourty_one = new Board(40) ;
-            Board fourty_two = new Board(41);
-            Board fourty_three = new Board(42) ;
-            Board fourty_four = new Board(43) ;
-            Board fourty_five = new Board(44) ;
-            Board fourty_six = new Board(45);
-            Board fourty_seven = new Board(46);
-            Board fourty_eight = new Board(47);
-            Board fourty_nine = new Board(48);
-            start1.right = one;
-            start1.left = fourty_nine;
-            one.right = two;
-            one.left = start1;
-            two.right = three;
-            two.left = one;
-            three.right = four;
-            three.left = two;
-            four.right = five;
-            four.left = three;
-            five.right = six;
-            five.left = four;
-            six.right = seven;
-            six.left = five;
-            seven.right = eight;
-            seven.left = six;
-            eight.right = nine;
-            eight.left = seven;
-            nine.right = ten;
-            nine.left = eight;
-            ten.right = eleven;
-            ten.left = nine;
-            eleven.right = start2;
-            eleven.left = ten;
-            start2.right = twelve;
-            start2.left = eleven;
-            twelve.right = fourteen;
-            twelve.left = start2;
-            fourteen.right = fifthteen;
-            fourteen.left = twelve;
-            fifthteen.right = sixteen;
-            fifthteen.left = fourteen;
-            sixteen.right = seventeen;
-            sixteen.left = fifthteen;
-            seventeen.right = eighteen;
-            seventeen.left = sixteen;
-            eighteen.right = nineteen;
-            eighteen.left = seventeen;
-            nineteen.right = twenty_one;
-            nineteen.left = eighteen;
-            twenty_one.right = twenty_two;
-            twenty_one.left = nineteen;
-            twenty_two.right = twenty_three;
-            twenty_two.left = twenty_one;
-            twenty_three.right = twenty_four;
-            twenty_three.left = twenty_two;
-            twenty_four.right = start3;
-            twenty_four.left = twenty_three;
-            start3.right = twenty_six;
-            start3.left = twenty_four;
-            twenty_six.right = twenty_seven;
-            twenty_six.left = start3;
-            twenty_seven.right = twenty_eight;
-            twenty_seven.left = twenty_six;
-            twenty_eight.right = twenty_nine;
-            twenty_eight.left = twenty_seven;
-            twenty_nine.right = thirty_one;
-            twenty_nine.left = twenty_eight;
-            thirty_one.right = thirty_two;
-            thirty_one.left = twenty_nine;
-            thirty_two.right = thirty_three;
-            thirty_two.left = thirty_one;
-            thirty_three.right = thirty_four;
-            thirty_three.left = thirty_two;
-            thirty_four.right = thirty_five;
-            thirty_four.left = thirty_three;
-            thirty_five.right = thirty_six;
-            thirty_five.left = thirty_four;
-            thirty_six.right = thirty_seven;
-            thirty_six.left = thirty_five;
-            thirty_seven.right = start4;
-            thirty_seven.left = thirty_six;
-            start4.right = thirty_nine;
-            start4.left = thirty_seven;
-            thirty_nine.right = fourty;
-            thirty_nine.left = start4;
-            fourty.right = fourty_one;
-            fourty.left = thirty_nine;
-            fourty_one.right = fourty_two;
-            fourty_one.left = fourty;
-            fourty_two.right = fourty_three;
-            fourty_two.left = fourty_one;
-            fourty_three.right = fourty_four;
-            fourty_three.left = fourty_two;
-            fourty_four.right = fourty_five;
-            fourty_four.left = fourty_three;
-            fourty_five.right = fourty_six;
-            fourty_five.left = fourty_four;
-            fourty_six.right = fourty_seven;
-            fourty_six.left = fourty_five;
-            fourty_seven.right = fourty_eight;
-            fourty_seven.left = fourty_six;
-            fourty_eight.right = fourty_nine;
-            fourty_eight.left = fourty_seven;
-            fourty_nine.right = start1;
-            fourty_nine.left = fourty_eight;*/
+            Player[] players = new Player[size];//create an array of players with the size=# of players
+            //looping throught the array to create each induivual player, setting their job and color etc
             for (x = 0; x < size; x++)
             {
                 players[x] = new Player();
             }
-            Console.WriteLine("Ok, so there is {0} players.\n", size);
+            //Console.WriteLine("Ok, so there is {0} players.\n", size); //testing to see how many players there are
             x = 0;
+            //starting the game, end_game var is to tell when the game is over
             while (end_game != 1)
             {
-                if(end_turn == 0)
+                //Start of each players turn, end_turn is to tell when each players turn is over
+                if(end_turn != 1)
                 {
-                    Console.WriteLine("It's {0},{1} turn!\n Here are your options: \n 1)Roll\n 2)Change Jobs/Quit Working\n 3)Sell Stock\n 4)Show the Stock Market\n 5)Show My Stock\n", players[x].name,players[x].color_name);
-                    int choice = Convert.ToInt32(Console.ReadLine());
+                    //The options during a players turn, which is stored into choice
+                    Console.WriteLine("It's {0},{1} turn!\n" +
+                        "Here are your options: \n" +
+                        "1)Roll\n" +
+                        "2)Change Jobs/Quit Working - only allowed before rolling\n" +
+                        "3)Sell Stock - ONLY ALLOWED BEFORE ROLLING\n" +
+                        "4)Show the Stock Market - only allowed before rolling\n" +
+                        "5)Show My Stock - only allowed before rolling\n", players[x].name,players[x].color_name);
+                    choice = Convert.ToInt32(Console.ReadLine());
+                    //the switch will handle each option that a player can choose during a turn
                     switch (choice)
                     {
                         case 1:
                             //roll
-                            players[x].rolling(size,players);
+                            players[x].rolling(size,players,sm);
+                            //once a players rolls, the player does what the square requires if not working and then their turn is done(end_turn is set to 1)
+                            if (players[x].work == -1)//if not working do what the square requires
+                            {
+                                //show the player the square they landed on
+                                players[x].position.show(players[x]);
+                                //check if the player gets a div
+                                if (players[x].stocks[players[x].position.stock_name_num] > 0)
+                                {
+                                    // ( div           *    the amount of stock the player has )
+                                    players[x].money = players[x].money + (players[x].position.div * players[x].stocks[players[x].position.stock_name_num]);
+                                    Console.WriteLine("Player: {0},{1} you got %d in dividends\n", players[x].name, players[x].color_name);
+                                    players[x].show();
+                                }
+                                //give the player the option to buy
+                                // if there is no stock meeting
+                                if (players[x].position.meeting == -1)
+                                {
+                                    //ask if the player wants to buy stock
+                                    int choice_buy = 0;
+                                    while (choice_buy == 0)
+                                    {
+                                        //show the player the current stock market price for the stock
+                                        Console.WriteLine("The current price of {0} is %d\n", players[x].position.title, sm.find(players[x].position_num));
+                                        //then ask if they wannt to buy
+                                        Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", players[x].position.title);
+                                        choice_buy = Convert.ToInt32(Console.ReadLine());
+                                        switch (choice_buy)
+                                        {
+                                            // they want to buy stock, need to now ask how many shares
+                                            case 1:
+                                                int shares;
+                                                sm.show();
+                                                Console.WriteLine("How many shares do you want to buy? Enter a number.\n");
+                                                shares = Convert.ToInt32(Console.ReadLine()); // may need to check if they entered a number before taking it but I will fix that later
+                                                players[x].buy_stock(sm, shares);
+                                                break;
+                                            case 2:
+                                                Console.WriteLine("You choose to not buy any.\n");
+                                                break;
+                                            default:
+                                                Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                                                choice_buy = 0;
+                                                break;
+                                        }
+                                    }
+                                }
+                                //if there is a stock meeting
+                                else if (players[x].position.meeting == 1)
+                                {
+                                    //ask if they want to buy stock, while telling them that they can only buy one stock since it is a stock meeting square
+                                    int choice_buy = 0;
+                                    while (choice_buy == 0)
+                                    {
+                                        //show the player their stats
+                                        players[x].show();
+                                        //show the player the current stock market price for the stock
+                                        Console.WriteLine("The current price of {0} is %d\n", players[x].position.title, sm.find(players[x].position_num));
+                                        //ask the player if the want to buy a share
+                                        Console.WriteLine("The square you landed on is a stockholders meeting, therefore there is a purchase limit of one share." +
+                                        " Do you want to buy {0} stock? Yes(1) or No(2)\n", players[x].position.title);
+                                        choice_buy = Convert.ToInt32(Console.ReadLine());
+                                        switch (choice_buy)
+                                        {
+                                            //buy one stock
+                                            case 1:
+                                                players[x].buy_stock(sm, 1);
+                                                break;
+                                            // not buying anything
+                                            case 2:
+                                                Console.WriteLine("You choose to not buy any.\n");
+                                                break;
+                                            //error message
+                                            default:
+                                                Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                                                choice_buy = 0;
+                                                break;
+                                        }
+                                    }
+                                    //ask if the player wants to go inot the stockholders meeting
+                                    choice_buy = 0;
+                                    while (choice_buy == 0)
+                                    {
+                                        Console.WriteLine("Do you want to go into the stockholders meeting? Yes(1) or No(2)\n");
+                                        choice_buy = Convert.ToInt32(Console.ReadLine());
+                                        switch (choice_buy)
+                                        {
+                                            case 1:
+                                                //check if the player can go into the meeting,
+                                                //check if they have at least one stock of the stock meeting they are wanting to go into
+                                                if (players[x].stocks[players[x].position.stock_name_num - 1] > 0)
+                                                {
+                                                    //go into the meeting 
+                                                    players[x].meeting = 1;
+                                                }
+                                                else
+                                                {
+                                                    //can't go into the meeting
+                                                    players[x].meeting = 2;
+                                                    Console.WriteLine("Sorry, you do not have at least one stock which is required to be able to go into the stockholders meeting.\n");
+                                                    players[x].show();
+                                                }
+                                                break;
+                                            case 2:
+                                                //not going into the meeting
+                                                players[x].meeting = 2;
+                                                Console.WriteLine("You are not going into the stockholders meeting.\n");
+                                                break;
+                                            default:
+                                                //error message
+                                                Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                                                choice_buy = 0;
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
                             end_turn = 1;
                             break;
                         case 2:
-                            //Change Jobs or Quit Job
+                            //Change Jobs or Quit Job, players can do this before rolling only
                             players[x].change_job();
-                            end_turn = 1;
                             break;
                         case 3:
-                            //Sell Stock
-                            players[x].sell_stock(sm);
+                            //Sell Stock, a player can only do this before rolling
+                            players[x].sell_stock(sm); 
                             break;
                         case 4:
                             //Show Stock Market
@@ -203,14 +182,17 @@ namespace stock_market
                             break;
                     }
                     if (end_turn == 1)
-                    {
-                        x++;
-                        end_turn = 0;
-                        if(x >= size)
+                    { 
+                        x++; // inc x var to go to the next player
+                        end_turn = 0; // reset end_turn var for the next player
+                        if(x >= size) // check to make sure we don't go out of bounds when accessing the player array
+                                      // ex: if there is only 2 players or size 2 the program should do player 0 turn(x=0),
+                                      // then player 1 turn(x=1), when x=2 it should go back to player 0 turn(x=0).
+                                      // And it would be one round of turns done.
                         {
                             x = 0;
                         }
-                        Console.WriteLine("\n\n\n\n");
+                        Console.WriteLine("\n");//idk if we need this?, at the end of the turn make a new line to separate the players turns
                     }
                 }
             }

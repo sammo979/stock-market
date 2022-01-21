@@ -67,15 +67,15 @@ namespace stock_market
             Console.WriteLine("        Western Pub: {0}\n", stocks[7]);
             Console.WriteLine("----------------------\n\n");
         }//done
-        public void rolling(int size,Player[] p, Market sm) 
+        public void Roll() 
         {
             // creates an array containing two random numbers(1-6) to act as our dice. Displays the two numbers to the player. Then calls player_move to move the player around the board.
             var rand = new Random();
             roll[0] = rand.Next(1,6);
             roll[1] = rand.Next(1,6);
             Console.WriteLine("{0}, {1} rolled {2} {3}.\n", name,color_name, roll[0], roll[1]);
-            player_move(size, p,sm);
-        }// done, calls player_move
+            //player_move(size, p,sm);  //lets make it separte 
+        }
         public void work_pay(int size, Player[] p, int work ) 
         {
             //set pay to the right amount of money based on which work was sent to this function.

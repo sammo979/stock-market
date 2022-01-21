@@ -41,7 +41,7 @@ namespace stock_market
                     {
                         case 1:
                             //roll
-                            players[x].rolling(size,players,sm);
+                            players[x].Roll();
                             //once a players rolls, the player does what the square requires if not working and then their turn is done(end_turn is set to 1)
                             if (players[x].work == -1)//if not working do what the square requires
                             {

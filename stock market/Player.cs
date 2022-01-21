@@ -47,7 +47,7 @@ namespace stock_market
             }
             position = board[position_num];
             return position;
-        }//done
+        }
         public void show() 
         {
             Console.WriteLine("{0}, {1}, here is your stats\n", color_name, name);
@@ -66,7 +66,7 @@ namespace stock_market
             Console.WriteLine("        A.M. Motors: {0}\n", stocks[6]);
             Console.WriteLine("        Western Pub: {0}\n", stocks[7]);
             Console.WriteLine("----------------------\n\n");
-        }//done
+        }
         public void Roll() 
         {
             // creates an array containing two random numbers(1-6) to act as our dice. Displays the two numbers to the player. Then calls player_move to move the player around the board.
@@ -106,7 +106,7 @@ namespace stock_market
                     Console.WriteLine("{0}, {1} got paid this amount {2}.\n",p[x].name,p[x].color_name , pay);
                 }
             }
-        }//done
+        }
         public void change_job() 
         { 
             //give the options on what the player can switch to, then displays the changed information.
@@ -175,36 +175,36 @@ namespace stock_market
                 }
             }
             Console.WriteLine("{0}, {1} changed jobs successfully.\n", name, color_name);
-        } //done
-        public void check_roll(int first, int second,int size,Player[] p)
+        }
+        public void check_roll()
         {
             // for each job it checks if the two random numbers meet the job requirements,
             // if they do then it calls the function work_pay to pay each player that is in that occupation.
             // Displays which occupation got paid or if no occupation got paid.
 
             //prospector
-            if ((first + second) == 2 || (first + second) == 12)
+            if ((roll[0] + roll[1]) == 2 || (roll[0] + roll[1]) == 12)
             {
                 //players working as prospector get paid
                 work_pay(size,p,1);
                 Console.WriteLine("Players working as prospectors got paid\n");
             }
             //policeman
-            else if ((first + second) == 5 || (first + second) == 9)
+            else if ((roll[0] + roll[1]) == 5 || (roll[0] + roll[1]) == 9)
             {
                 //players working as policeman get paid
                 work_pay(size,p,2);
                 Console.WriteLine("Players working as policemans got paid\n");
             }
             //Doctor 
-            else if ((first + second) == 4 || (first + second) == 10)
+            else if ((roll[0] + roll[1]) == 4 || (roll[0] + roll[1]) == 10)
             {
                 //players working as a Doctor
                 work_pay(size,p,3);
                 Console.WriteLine("Players working as Doctors got paid\n");
             }
             //Deep Sea Diver
-            else if ((first + second) == 3 || (first + second) == 11)
+            else if ((roll[0] + roll[1]) == 3 || (roll[0] + roll[1]) == 11)
             {
                 //players working as a Deep Sea Diver
                 work_pay(size,p,4);
@@ -214,18 +214,23 @@ namespace stock_market
             {
                 Console.WriteLine("Nobody who is working got paid this round.\n");
             }
-        } //done
-        public void player_move(int size, Player[] p, Market sm)
+        } 
+        public void player_move(Market sm)
         {
-            int choice = 0;
-            check_roll(roll[0], roll[1], size, p);
-            if (work == 1 || work == 2 || work == 3 || work == 4)//if player is still in "work"
+            int choice;
+            //check_roll(roll[0], roll[1], size, p); //I think I am doing too much in one function.
+            //if player is still in "work"
+            if (work == 1 || work == 2 || work == 3 || work == 4)
             {
-                if (money >= 1000)//check if the player has made enough money to get kick out of "work", the rule is that once you hit 1000 or more you can only collect salary until your next turn, mine only allows you to collect if you got more than 1000 on someones elses turn
+                //check if the player has made enough money to get kick out of "work",
+                //the rule is that once you hit 1000 or more you can only collect salary until your next turn,
+                //mine only allows you to collect if you got more than 1000 on someones elses turn
+                if (money >= 1000) 
                 {
                     int check = 0;
                     while (check == 0)
-                    { // 1 with woolworth next, gen mills 13 int shoe, am motors 25 western publishing, ji case 37 maytag
+                    { 
+                        // 1 with woolworth next, gen mills 13 int shoe, am motors 25 western publishing, ji case 37 maytag
                         Console.WriteLine("{0}: You have passed the limit for working. Pick which starting square you want.\n" +
                         "1) which is by Western Publ. and AM. Motors Stockholders Meeting\n" +
                         "2) which is by J.I. Case and Maytag Stockholders Meeting\n" +
@@ -260,7 +265,8 @@ namespace stock_market
                     Console.WriteLine("{0} is moving out of the work phase of the game and is now on the board!\n",color_name);
                 }
             }
-            if(work == -1)//if the player is  not work
+            //if the player is  not work
+            if(work == -1)
             {
                 //check if on a starting square
                 if (position == board[1] || position == board[13] || position == board[37] || position == board[25])
@@ -300,7 +306,7 @@ namespace stock_market
             {
                 return 0;
             }
-        } //done
+        } 
         public int sell_stock(Market sm) 
         {
             int choice, cost=0, num, check=0;
@@ -441,7 +447,7 @@ namespace stock_market
                 }
             }
             return 0;
-        } //done
+        }
         /*public void buy_stock_meeting(Market sm)
         {
             //charge the player the current price of the stock that they want to buy, since they can only buy one, also I know I could use a compound statement but I find I can read this better, personal perference
@@ -503,8 +509,8 @@ namespace stock_market
                     bought = 1;
                 }
             }
-        }// done
-        public Player()//done
+        }
+        public Player()
         {
             //seting up the player's information
             for (int d = 1; d <= 48; d++)

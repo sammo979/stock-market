@@ -12,7 +12,7 @@ namespace stock_market
         public int direction; // 1 means down, 2 means up, for the stock market
         public int movement; //1 means left, 2 means right, for player movement
         public int move; // how much to move the stock market
-        public int meeting; // if the square allows for a meeting
+        public int meeting; // if the square allows for a meeting 1 for yes, -1 for no
         
         public void show(Player p)
         {

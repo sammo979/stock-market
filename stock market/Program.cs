@@ -53,7 +53,7 @@ namespace stock_market
                                     // ( div           *    the amount of stock the player has )
                                     players[x].money = players[x].money + (players[x].position.div * players[x].stocks[players[x].position.stock_name_num]);
                                     Console.WriteLine("Player: {0},{1} you got %d in dividends\n", players[x].name, players[x].color_name);
-                                    players[x].show();
+                                    players[x].Show();
                                 }
                                 //give the player the option to buy
                                 // if there is no stock meeting
@@ -64,7 +64,7 @@ namespace stock_market
                                     while (choice_buy == 0)
                                     {
                                         //show the player the current stock market price for the stock
-                                        Console.WriteLine("The current price of {0} is %d\n", players[x].position.title, sm.find(players[x].position_num));
+                                        Console.WriteLine("The current price of {0} is %d\n", players[x].position.title, sm.Find(players[x].position_num));
                                         //then ask if they wannt to buy
                                         Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", players[x].position.title);
                                         choice_buy = Convert.ToInt32(Console.ReadLine());
@@ -72,11 +72,7 @@ namespace stock_market
                                         {
                                             // they want to buy stock, need to now ask how many shares
                                             case 1:
-                                                int shares;
-                                                sm.show();
-                                                Console.WriteLine("How many shares do you want to buy? Enter a number.\n");
-                                                shares = Convert.ToInt32(Console.ReadLine()); // may need to check if they entered a number before taking it but I will fix that later
-                                                players[x].buy_stock(sm, shares);
+                                                players[x].Buy_stock(sm);
                                                 break;
                                             case 2:
                                                 Console.WriteLine("You choose to not buy any.\n");
@@ -96,9 +92,9 @@ namespace stock_market
                                     while (choice_buy == 0)
                                     {
                                         //show the player their stats
-                                        players[x].show();
+                                        players[x].Show();
                                         //show the player the current stock market price for the stock
-                                        Console.WriteLine("The current price of {0} is %d\n", players[x].position.title, sm.find(players[x].position_num));
+                                        Console.WriteLine("The current price of {0} is %d\n", players[x].position.title, sm.Find(players[x].position_num));
                                         //ask the player if the want to buy a share
                                         Console.WriteLine("The square you landed on is a stockholders meeting, therefore there is a purchase limit of one share." +
                                         " Do you want to buy {0} stock? Yes(1) or No(2)\n", players[x].position.title);
@@ -107,7 +103,7 @@ namespace stock_market
                                         {
                                             //buy one stock
                                             case 1:
-                                                players[x].buy_stock(sm, 1);
+                                                players[x].Buy_stock(sm);
                                                 break;
                                             // not buying anything
                                             case 2:
@@ -141,7 +137,7 @@ namespace stock_market
                                                     //can't go into the meeting
                                                     players[x].meeting = 2;
                                                     Console.WriteLine("Sorry, you do not have at least one stock which is required to be able to go into the stockholders meeting.\n");
-                                                    players[x].show();
+                                                    players[x].Show();
                                                 }
                                                 break;
                                             case 2:
@@ -162,19 +158,19 @@ namespace stock_market
                             break;
                         case 2:
                             //Change Jobs or Quit Job, players can do this before rolling only
-                            players[x].change_job();
+                            players[x].Change_job();
                             break;
                         case 3:
                             //Sell Stock, a player can only do this before rolling
-                            players[x].sell_stock(sm); 
+                            players[x].Sell_stock(sm); 
                             break;
                         case 4:
                             //Show Stock Market
-                            sm.show();
+                            sm.Show();
                             break;
                         case 5:
                             //Show players hand
-                            players[x].show();
+                            players[x].Show();
                             break;
                         default:
                             //Error message

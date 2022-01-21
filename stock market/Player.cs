@@ -7,8 +7,8 @@ namespace stock_market
     public class Player
     {
         public int money = 0; //how much money a player has
-        public string color_name; //the color of the pawn 
-        public string name; //the name of the player
+        public readonly string color_name; //the color of the pawn 
+        public readonly string name; //the name of the player
         public int[] stocks = new int[8]; //an array of stocks for the player
         public int[] roll = new int[2]; // an array to hold the two numbers that a dice would roll
         public int work = 0; //the number that corresponds to the job a player has, prospector-1, policeman-2, doctor-3, deep sea diver-4, not working:-1
@@ -17,12 +17,12 @@ namespace stock_market
         public string work_name; //the name of the work
         public Board_Square position; // the current postion of the player
         public int position_num; // the current postion num in the array
-        Board_Square[] board = new Board_Square[49];
-        Start_Board Prospector = new Start_Board(1);
-        Start_Board Policeman = new Start_Board(2);
-        Start_Board Doctor = new Start_Board(3);
-        Start_Board Deep_Sea_Diver = new Start_Board(4);
-        public void Move_postion() 
+        private readonly Board_Square[] board = new Board_Square[49];
+        private readonly Start_Board Prospector = new Start_Board(1);
+        private readonly Start_Board Policeman = new Start_Board(2);
+        private readonly Start_Board Doctor = new Start_Board(3);
+        private readonly Start_Board Deep_Sea_Diver = new Start_Board(4);
+        public void Move_position() 
         {
             int num = roll[0] + roll[1];
             while (num > 0)
@@ -65,7 +65,7 @@ namespace stock_market
             Console.WriteLine("        A.M. Motors: {0}\n", stocks[6]);
             Console.WriteLine("        Western Pub: {0}\n", stocks[7]);
             Console.WriteLine("----------------------\n\n");
-        }
+        } //check 1/21
         public void Roll() 
         {
             // creates an array containing two random numbers(1-6) to act as our dice. Displays the two numbers to the player. Then calls player_move to move the player around the board.
@@ -74,7 +74,7 @@ namespace stock_market
             roll[1] = rand.Next(1,6);
             Console.WriteLine("{0}, {1} rolled {2} {3}.\n", name,color_name, roll[0], roll[1]);
             //player_move(size, p,sm);  //lets make it separte 
-        }
+        } //check 1/21
         public void Work_pay(int size, Player[] p, int work)
         {
             //set pay to the right amount of money based on which work was sent to this function.
@@ -111,7 +111,7 @@ namespace stock_market
                     Console.WriteLine("{0}, {1} got paid this amount {2}.\n",p[x].name,p[x].color_name , pay);
                 }
             }
-        }
+        }//check 1/21
         public void Change_job() 
         { 
             //give the options on what the player can switch to, then displays the changed information.
@@ -263,24 +263,24 @@ namespace stock_market
                     {
                         //move the direction of the even arrow, move right
                         position.movement = 2;
-                        position = Inc_postion(position_num, position);
+                        Move_position();
                     }
                     //the roll was not even so its odd
                     else
                     {
                         //move the direction of the odd arrow, move left
                         position.movement = 1;
-                        position = Inc_postion(position_num, position);
+                        Move_position();
                     }
                 }
                 //on a normal square
                 else
                 {
                     //move in the direction of the arrow
-                    position = Inc_postion(position_num, position); 
+                    Move_position(); 
                 }
                 //move stock market
-                sm.inc(position.move, position.direction);
+                sm.Inc(position.move, position.direction);
             }
         }
         public int Check_stock(int stock_num, int num) 
@@ -451,57 +451,87 @@ namespace stock_market
             }
             return 0;
         } //check 1/21, not done, need forced selling
-        public void Buy_stock(Market sm, int shares)
+        public void Buy_stock(Market sm)
         {
-            int cost, current_price, bought = 0;
-            while (bought == 0)
+            int cost, current_price, bought = 0, shares = 0, choice=0;
+            while (choice == 0)
             {
-                //if the player tried to buy more shares than they had money to buy, need to ask again how many shares do they want to buy,
-                //and show them the stock market price
-                if(shares == 0)
+                //show the player the current stock market price for the stock
+                Console.WriteLine("The current price of {0} is %d\n", position.title, sm.Find(position_num));
+                //then ask if they wannt to buy
+                Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", position.title);
+                choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
                 {
-                    sm.show();
-                    Console.WriteLine("How many shares of {0} do you want to buy? Enter a number.\n", position.title);
-                    shares = Convert.ToInt32(Console.ReadLine());
-                }
-                //calcuate the current price of the stock that the player wants to buy
-                current_price = sm.find(position.stock_name_num);
-                //cost = the # of stock the players wants to buy * the current stock price from the stock market
-                cost = shares * current_price;
-                //check if the player can afford to pay
-                if (money < cost)
-                {
-                    //tell the player they can not afford the number of share they ask to buy
-                    Console.WriteLine("You do not have enough money to buy the amount of shares that you wanted.\n");
-                    //if they are on a stock holders meeting square and can't afford to buy one share, exit the loop and tell them they can't afford it
-                    if(shares == 1)
-                    {
-                        Console.WriteLine("You can only buy one share because you are on a stockholders meeting entance square, but do not have enough money to buy one share.\n");
-                        bought = 1;
-                    }
-                    //if not on a stock holder meeting square then reset the share var to 0
-                    //then the while loop goes again and will go into the if statment based on shares and ask how many shares again
-                    else
-                    {
-                        shares = 0;
-                    }
-                    
-                }
-                //the player can afford to buy the number of shares they asked for
-                else
-                {
-                    //charge the player the right amount of money, I know I could use compound statement but I find that I can read this better, personal perference
-                    money = money - cost;
-                    //add the right amount of shares to the players stock
-                    stocks[position.stock_name_num - 1] = stocks[position.stock_name_num - 1] + shares;
-                    //show the player what happen
-                    Console.WriteLine("Player: {0], {1}, you wanted to buy %d shares of {2}, with the current stock price of %d, which will cost you %d.\n", name, color_name, shares, position.title, current_price, cost);
-                    show();
-                    //set bought to 1 to break the while loop
-                    bought = 1;
+                    case 1:
+                        //yes
+                        while (bought == 0)
+                        {
+                            //if the player tried to buy more shares than they had money to buy, need to ask again how many shares do they want to buy,
+                            //and show them the stock market price
+                            if (shares == 0)
+                            {
+                                sm.Show();
+                                if (position.meeting != 1)
+                                {
+                                    Console.WriteLine("How many shares of {0} do you want to buy? Enter a number.\n", position.title);
+                                    shares = Convert.ToInt32(Console.ReadLine());
+                                }
+                                else
+                                {
+                                    shares = 1;
+                                }
+                            }
+                            //calcuate the current price of the stock that the player wants to buy
+                            current_price = sm.Find(position.stock_name_num);
+                            //cost = the # of stock the players wants to buy * the current stock price from the stock market
+                            cost = shares * current_price;
+                            //check if the player can afford to pay
+                            if (money < cost)
+                            {
+                                //tell the player they can not afford the number of share they ask to buy
+                                Console.WriteLine("You do not have enough money to buy the amount of shares that you wanted.\n");
+                                //if they are on a stock holders meeting square and can't afford to buy one share, exit the loop and tell them they can't afford it
+                                if (position.meeting == 1)
+                                {
+                                    Console.WriteLine("You can only buy one share because you are on a stockholders meeting entance square, but do not have enough money to buy one share.\n");
+                                    bought = 1;
+                                }
+                                //if not on a stock holder meeting square then reset the share var to 0
+                                //then the while loop goes again and will go into the if statment based on shares and ask how many shares again
+                                else
+                                {
+                                    shares = 0;
+                                }
+
+                            }
+                            //the player can afford to buy the number of shares they asked for
+                            else
+                            {
+                                //charge the player the right amount of money, I know I could use compound statement but I find that I can read this better, personal perference
+                                money -= cost;
+                                //add the right amount of shares to the players stock
+                                //stocks[position.stock_name_num - 1] = stocks[position.stock_name_num - 1] + shares;
+                                stocks[position.stock_name_num - 1] += shares;
+                                //show the player what happen
+                                Console.WriteLine("Player: {0], {1}, you wanted to buy %d shares of {2}, with the current stock price of %d, which will cost you %d.\n", name, color_name, shares, position.title, current_price, cost);
+                                Show();
+                                //set bought to 1 to break the while loop
+                                bought = 1;
+                            }
+                        }
+                        break;
+                    case 2:
+                        //no
+                        Console.WriteLine("You choose to not buy any.\n");
+                        break;
+                    default:
+                        Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                        choice = 0;
+                        break;
                 }
             }
-        }
+        } //check 1/21
         public Player()
         {
             //seting up the player's information
@@ -550,7 +580,7 @@ namespace stock_market
                         stocks[loop] = 0;
                     }
                     Console.WriteLine("Player {0}, {1}:", name, color_name);
-                    show();
+                    Show();
                 }
                 else
                 {

@@ -16,7 +16,7 @@ namespace stock_market
         public int[] am_motors = new int[51]; //7
         public int[] western_pub = new int[51]; //8
 
-        public void inc(int move, int direction)
+        public void Inc(int move, int direction)
         {
             int x;
             //move the stock market to the new place
@@ -46,7 +46,7 @@ namespace stock_market
                 current_place = current_place - x;
             }
         } //done, move the current place of the stock market
-        public int find(int stock_name_num)
+        public int Find(int stock_name_num)
         {
             int found;
             switch(stock_name_num)
@@ -82,7 +82,7 @@ namespace stock_market
             }
             return found;
         }//returns the current price of the stock num you have given the function
-        public void show()
+        public void Show()
         {
             Console.WriteLine("Here is the Stocket Market right now: \n");
             Console.WriteLine("------------------\n");
@@ -96,7 +96,7 @@ namespace stock_market
             Console.WriteLine("        Western Pub: {0}\n", western_pub[current_place]);
             Console.WriteLine("------------------\n\n");
         } //done, shows the current price of each stock
-        public void fill()
+        public void Fill()
         {
             current_place = 25;
             for (int x = 0; x < 51; x++)
@@ -134,7 +134,7 @@ namespace stock_market
         } //done, fill the stock market with the right numbers at the start of the game
         public Market()
         {
-            fill();
+            Fill();
         } //done, calls fill because a new market was created
     }
 }

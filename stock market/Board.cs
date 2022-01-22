@@ -7,6 +7,7 @@ namespace stock_market
     public class Board_Square
     {
         public string title; // the name or message of the square
+        public string description; // the details of the square
         public int div; // the div that the person gets if they have the stock
         public int stock_name_num; // the number which corresponds to the stock name
         public int direction; // 1 means down, 2 means up, for the stock market
@@ -17,6 +18,7 @@ namespace stock_market
         public void Show()
         {
             Console.WriteLine("Title: {0}\n",title);
+            Console.WriteLine("Description: {0}\n", description);
             Console.WriteLine("Div: {0}\n",div);
             Console.WriteLine("Direction: {0}\n", direction);
             Console.WriteLine("Move: {0}\n",move);
@@ -29,7 +31,8 @@ namespace stock_market
             switch(num)
             {
                 case 1:
-                    title = "START - Pay $100 FEE -2\n";
+                    title = "START\n";
+                    description = "Pay $100 FEE\n";
                     div = -1;
                     stock_name_num = -1;
                     direction = -1;
@@ -40,6 +43,7 @@ namespace stock_market
                     break;
                 case 2:
                     title = "Woolworth\n";
+                    description = "None\n";
                     div = 4;
                     stock_name_num = 1;
                     direction = 1;
@@ -50,6 +54,7 @@ namespace stock_market
                     break;
                 case 3:
                     title = "Western Publishing\n";
+                    description = "None\n";
                     div = 2;
                     stock_name_num = 8;
                     direction = 2;
@@ -59,7 +64,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 4:
-                    title = "Maytag - Purchase Limit One Share\n";
+                    title = "Maytag\n";
+                    description = "Purchase Limit One Share\n";
                     div = 2;
                     stock_name_num = 5;
                     direction = 1;
@@ -70,6 +76,7 @@ namespace stock_market
                     break;
                 case 5:
                     title = "Int. Shoe\n";
+                    description = "None\n";
                     div = 1;
                     stock_name_num = 3;
                     direction = 2;
@@ -79,7 +86,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 6:
-                    title = "Sell all J.I. Case - At $15 Per Share\n";
+                    title = "J.I. Case\n";
+                    description = "Sell all, At $15 Per Share\n";
                     div = -1;
                     stock_name_num = 4;
                     direction = 1;
@@ -90,6 +98,7 @@ namespace stock_market
                     break;
                 case 7:
                     title = "Pay - Broker Fee $10 Per Share\n";
+                    description = "None\n";
                     div = -2;
                     stock_name_num = -2;
                     direction = 1;
@@ -99,7 +108,8 @@ namespace stock_market
                     unqiue = 2;
                     break;
                 case 8:
-                    title = "Sell All Western Publishing - At $10 Per Share\n";
+                    title = "Western Publishing\n";
+                    description = "Sell All, At $10 Per Share\n";
                     div = -1;
                     stock_name_num = 8;
                     direction = 1;
@@ -110,6 +120,7 @@ namespace stock_market
                     break;
                 case 9:
                     title = "Aloca\n";
+                    description = "None\n";
                     div = 4;
                     stock_name_num = 2;
                     direction = 1;
@@ -119,7 +130,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 10:
-                    title = "A.M. Motors - Purchase Limit One Share\n";
+                    title = "A.M. Motors\n";
+                    description = "Purchase Limit One Share\n";
                     div = 3;
                     stock_name_num = 7;
                     direction = 2;
@@ -130,6 +142,7 @@ namespace stock_market
                     break;
                 case 11:
                     title = "Maytag\n";
+                    description = "None\n";
                     div = 2;
                     stock_name_num = 5;
                     direction = 1;
@@ -139,6 +152,7 @@ namespace stock_market
                     break;
                 case 12:
                     title = "Gen. Mills\n";
+                    description = "None\n";
                     div = 1;
                     stock_name_num = 6;
                     direction = 2;
@@ -147,7 +161,8 @@ namespace stock_market
                     meeting = -1;
                     break;
                 case 13:
-                    title = "Start - Pay $100 Fee -1\n";
+                    title = "Start\n";
+                    description = "Pay $100 Fee\n";
                     div = -1;
                     stock_name_num = -1;
                     direction = -1;
@@ -158,6 +173,7 @@ namespace stock_market
                     break;
                 case 14:
                     title = "Int. Shoe\n";
+                    description = "None\n";
                     div = 1;
                     stock_name_num = 3;
                     direction = 2;
@@ -168,6 +184,7 @@ namespace stock_market
                     break;
                 case 15:
                     title = "J.I. Case\n";
+                    description = "None\n";
                     div = 2;
                     stock_name_num = 4;
                     direction = 1;
@@ -177,7 +194,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 16:
-                    title = "Western Publishing  - Purchase Limit One Share\n";
+                    title = "Western Publishing\n";
+                    description = "Purchase Limit One Share\n";
                     div = 3;
                     stock_name_num = 8;
                     direction = 2;
@@ -188,6 +206,7 @@ namespace stock_market
                     break;
                 case 17:
                     title = "Woolworth\n";
+                    description = "None\n";
                     div = 4;
                     stock_name_num = 1;
                     direction = 1;
@@ -197,7 +216,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 18:
-                    title = "Sell All A.M. Motors - At $10 Per Share\n";
+                    title = "A.M. Motors\n";
+                    description = "Sell All, At $10 Per Share\n";
                     div = -1;
                     stock_name_num = 7;
                     direction = 2;
@@ -208,6 +228,7 @@ namespace stock_market
                     break;
                 case 19:
                     title = "Pay Broker Fee $10 Per Share\n";
+                    description = "None\n";
                     div = -2;
                     stock_name_num = -2;
                     direction = 2;
@@ -217,7 +238,8 @@ namespace stock_market
                     unqiue = 2;
                     break;
                 case 20:
-                    title = "Sell All Int. Shoe - At $18 Per Share\n";
+                    title = "Int. Shoe\n";
+                    description = "Sell All, At $18 Per Share\n";
                     div = -1;
                     stock_name_num = 3;
                     direction = 1;
@@ -228,6 +250,7 @@ namespace stock_market
                     break;
                 case 21:
                     title = "Maytag\n";
+                    description = "None\n";
                     div = 2;
                     stock_name_num = 5;
                     direction = 2;
@@ -237,7 +260,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 22:
-                    title = "Gen. Mills - Purchase Limit One Share\n";
+                    title = "Gen. Mills\n";
+                    description = "Purchase Limit One Share\n";
                     div = 1;
                     stock_name_num = 6;
                     direction = 1;
@@ -248,6 +272,7 @@ namespace stock_market
                     break;
                 case 23:
                     title = "Aloca\n";
+                    description = "None\n";
                     div = 4;
                     stock_name_num = 2;
                     direction = 2;
@@ -258,6 +283,7 @@ namespace stock_market
                     break;
                 case 24:
                     title = "A.M. Motors\n";
+                    description = "None\n";
                     div = 3;
                     stock_name_num = 7;
                     direction = 1;
@@ -267,7 +293,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 25:
-                    title = "Start - Pay $100 Fee\n";
+                    title = "Start\n";
+                    description = "Pay $100 Fee\n";
                     div = -1;
                     stock_name_num = -1;
                     direction = -1;
@@ -278,6 +305,7 @@ namespace stock_market
                     break;
                 case 26:
                     title = "Western Publishing\n";
+                    description = "None\n";
                     div = 3;
                     stock_name_num = 8;
                     direction = 1;
@@ -288,6 +316,7 @@ namespace stock_market
                     break;
                 case 27:
                     title = "Woolworth\n";
+                    description = "None\n";
                     div = 4;
                     stock_name_num = 1;
                     direction = 2;
@@ -297,7 +326,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 28:
-                    title = "Int. Shoe - Purchase Limit One Share\n";
+                    title = "Int. Shoe\n";
+                    description = "Purchase Limit One Share\n";
                     div = 2;
                     stock_name_num = 3;
                     direction = 1;
@@ -308,6 +338,7 @@ namespace stock_market
                     break;
                 case 29:
                     title = "J.I. Case\n";
+                    description = "None\n";
                     div = 2;
                     stock_name_num = 4;
                     direction = 2;
@@ -317,7 +348,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 30:
-                    title = "Sell all Gen. Mills - at $18 Per Share\n";
+                    title = "Gen. Mills\n";
+                    description = "Sell All, At $18 Per Share\n";
                     div = -1;
                     stock_name_num = 6;
                     direction = 1;
@@ -328,6 +360,7 @@ namespace stock_market
                     break;
                 case 31:
                     title = "Pay Broker Fee $10 Per Share\n";
+                    description = "None\n";
                     div = -2;
                     stock_name_num = -2;
                     direction = 1;
@@ -337,7 +370,8 @@ namespace stock_market
                     unqiue = 2;
                     break;
                 case 32:
-                    title = "Sell All Aloca - At $30 Per Share\n";
+                    title = "Aloca\n";
+                    description = "Sell All, At $30 Per Share\n";
                     div = -1;
                     stock_name_num = 2;
                     direction = 2;
@@ -348,6 +382,7 @@ namespace stock_market
                     break;
                 case 33:
                     title = "Western Publishing\n";
+                    description = "None\n";
                     div = 3;
                     stock_name_num = 8;
                     direction = 1;
@@ -357,7 +392,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 34:
-                    title = "Woolworth - Purchase Limit One Share\n";
+                    title = "Woolworth\n";
+                    description = "Purchase Limit One Share\n";
                     div = 4;
                     stock_name_num = 1;
                     direction = 2;
@@ -368,6 +404,7 @@ namespace stock_market
                     break;
                 case 35:
                     title = "Int. Shoe\n";
+                    description = "None\n";
                     div = 1;
                     stock_name_num = 3;
                     direction = 1;
@@ -378,6 +415,7 @@ namespace stock_market
                     break;
                 case 36:
                     title = "J.I. Case\n";
+                    description = "None\n";
                     div = 2;
                     stock_name_num = 4;
                     direction = 2;
@@ -387,7 +425,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 37:
-                    title = "Start - Pay $100 Fee -3\n";
+                    title = "Start\n";
+                    description = "Pay $100 Fee\n";
                     div = -1;
                     stock_name_num = -1;
                     direction = -1;
@@ -398,6 +437,7 @@ namespace stock_market
                     break;
                 case 38:
                     title = "Maytag\n";
+                    description = "None\n";
                     div = 2;
                     stock_name_num = 5;
                     direction = 2;
@@ -408,6 +448,7 @@ namespace stock_market
                     break;
                 case 39:
                     title = "Gen. Mills\n";
+                    description = "None\n";
                     div = 1;
                     stock_name_num = 6;
                     direction = 1;
@@ -417,7 +458,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 40:
-                    title = "Aloca - Purchase Limit One Share\n";
+                    title = "Aloca\n";
+                    description = "Purchase Limit One Share\n";
                     div = 4;
                     stock_name_num = 2;
                     direction = 2;
@@ -428,6 +470,7 @@ namespace stock_market
                     break;
                 case 41:
                     title = "A.M. Motors\n";
+                    description = "None\n";
                     div = 3;
                     stock_name_num = 7;
                     direction = 1;
@@ -438,6 +481,7 @@ namespace stock_market
                     break;
                 case 42:
                     title = "Sell All Woolworth - At $30 Per Share\n";
+                    description = "Sell All, At $30 Per Share\n";
                     div = -1;
                     stock_name_num = 1;
                     direction = 2;
@@ -448,6 +492,7 @@ namespace stock_market
                     break;
                 case 43:
                     title = "Pay Broker Fee $10 Per Share\n";
+                    description = "None\n";
                     div = -2;
                     stock_name_num = -2;
                     direction = 2;
@@ -457,7 +502,8 @@ namespace stock_market
                     unqiue = 2;
                     break;
                 case 44:
-                    title = "Sell All Maytag - At $15 Per Share\n";
+                    title = "Maytag\n";
+                    description = "Sell All, At $15 Per Share\n";
                     div = -1;
                     stock_name_num = 5;
                     direction = 1;
@@ -468,6 +514,7 @@ namespace stock_market
                     break;
                 case 45:
                     title = "Gen. Mills\n";
+                    description = "None\n";
                     div = 1;
                     stock_name_num = 6;
                     direction = 2;
@@ -477,7 +524,8 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 46:
-                    title = "J.I. Case -  Purchase Limit One Share\n";
+                    title = "J.I. Case\n";
+                    description = "Purchase Limit One Share\n";
                     div = 2;
                     stock_name_num = 4;
                     direction = 1;
@@ -488,6 +536,7 @@ namespace stock_market
                     break;
                 case 47:
                     title = "A.M. Motors\n";
+                    description = "None\n";
                     div = 3;
                     stock_name_num = 7;
                     direction = 2;
@@ -498,6 +547,7 @@ namespace stock_market
                     break;
                 case 48:
                     title = "Alcoa\n";
+                    description = "None\n";
                     div = 4;
                     stock_name_num = 2;
                     direction = 1;

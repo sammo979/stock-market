@@ -828,73 +828,15 @@ namespace stock_market
                             }
                             //give the player the option to buy
                             Buy_stock(sm);
-                            // if there is no stock meeting
-                            /*else if (position.meeting == -1 && position.unqiue != 1 && position.unqiue != 2 && position.unqiue != 3)
-                            {
-                                //ask if the player wants to buy stock
-                                int choice_buy = 0;
-                                while (choice_buy == 0)
-                                {
-                                    //show the player the current stock market price for the stock
-                                    Console.WriteLine("The current price of {0} is {1}\n", position.title, sm.Find(position.stock_name_num));
-                                    //then ask if they wannt to buy
-                                    Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", position.title);
-                                    choice_buy = Convert.ToInt32(Console.ReadLine());
-                                    switch (choice_buy)
-                                    {
-                                        // they want to buy stock, need to now ask how many shares
-                                        case 1:
-                                            Buy_stock(sm);
-                                            break;
-                                        case 2:
-                                            Console.WriteLine("You choose to not buy any.\n");
-                                            break;
-                                        default:
-                                            Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
-                                            choice_buy = 0;
-                                            break;
-                                    }
-                                }
-                            }*/
-                            //if there is a stock meeting
-                            /*else if (position.meeting == 1)
-                            {
-                                //ask if they want to buy stock, while telling them that they can only buy one stock since it is a stock meeting square
-                                int choice_buy = 0;
-                                while (choice_buy == 0)
-                                {
-                                    //show the player their stats
-                                    Show();
-                                    //show the player the current stock market price for the stock
-                                    Console.WriteLine("The current price of {0} is {1}\n", position.title, sm.Find(position.stock_name_num));
-                                    //ask the player if the want to buy a share
-                                    Console.WriteLine("The square you landed on is a stockholders meeting, therefore there is a purchase limit of one share." +
-                                    " Do you want to buy {0} stock? Yes(1) or No(2)\n", position.title);
-                                    choice_buy = Convert.ToInt32(Console.ReadLine());
-                                    switch (choice_buy)
-                                    {
-                                        //buy one stock
-                                        case 1:
-                                            Buy_stock(sm);
-                                            break;
-                                        // not buying anything
-                                        case 2:
-                                            Console.WriteLine("You choose to not buy any.\n");
-                                            break;
-                                        //error message
-                                        default:
-                                            Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
-                                            choice_buy = 0;
-                                            break;
-                                    }
-                                }*/
-                                //ask if the player wants to go inot the stockholders meeting
-                                choice_buy = 0;
-                                while (choice_buy == 0)
+                            //ask if the player wants to go inot the stockholders meeting
+                            if(position.meeting == 1)
+                            { 
+                                choice = 0;
+                                while (choice == 0)
                                 {
                                     Console.WriteLine("Do you want to go into the stockholders meeting? Yes(1) or No(2)\n");
-                                    choice_buy = Convert.ToInt32(Console.ReadLine());
-                                    switch (choice_buy)
+                                    choice= Convert.ToInt32(Console.ReadLine());
+                                    switch (choice)
                                     {
                                         case 1:
                                             //check if the player can go into the meeting,
@@ -920,7 +862,7 @@ namespace stock_market
                                         default:
                                             //error message
                                             Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
-                                            choice_buy = 0;
+                                            choice = 0;
                                             break;
                                     }
                                 }

@@ -16,17 +16,17 @@ namespace stock_market
         public int[] am_motors = new int[51]; //7
         public int[] western_pub = new int[51]; //8
 
-        public void Inc(int move, int direction)
+        public void Move(Board_Square b)
         {
             int x;
             //move the stock market to the new place
-            if (direction == 1)
+            if (b.direction == 1)
             {
-                current_place = current_place - move;
+                current_place -= b.move;
             }
             else
             {
-                current_place = current_place + move;
+                current_place += b.move;
             }
             //check if current_place is out of bounds
             if (current_place < 0)
@@ -35,7 +35,7 @@ namespace stock_market
                 {
                     current_place++;
                 }
-                current_place = current_place + x;
+                current_place += x;
             }
             if (current_place > 50)
             {
@@ -43,45 +43,59 @@ namespace stock_market
                 {
                     current_place--;
                 }
-                current_place = current_place - x;
+                current_place -= x;
             }
         } //done, move the current place of the stock market
         public int Find(int stock_name_num)
         {
-            int found;
             switch(stock_name_num)
             {
                 case 1:
-                    found = woolwth[current_place];
-                    break;
+                    return woolwth[current_place];
                 case 2:
-                    found = aloca[current_place];
-                    break;
+                    return aloca[current_place];
                 case 3:
-                    found = intshoe[current_place];
-                    break;
+                    return intshoe[current_place];
                 case 4:
-                    found = j_i_case[current_place];
-                    break;
+                    return j_i_case[current_place];
                 case 5:
-                    found = maytag[current_place];
-                    break;
+                    return maytag[current_place];
                 case 6:
-                    found = gen_mills[current_place];
-                    break;
+                    return gen_mills[current_place];
                 case 7:
-                    found = am_motors[current_place];
-                    break;
+                    return am_motors[current_place];
                 case 8:
-                    found = western_pub[current_place];
-                    break;
+                    return western_pub[current_place];
                 default:
                     Console.WriteLine("Enter wrong number!\n");
-                    found = -1;
-                    break;
+                    return -1;
             }
-            return found;
         }//returns the current price of the stock num you have given the function
+        public int Find_base(int stock_name_num)
+        {
+            switch (stock_name_num)
+            {
+                case 1:
+                    return woolwth[0];
+                 case 2:
+                    return aloca[50];
+                case 3:
+                    return intshoe[0];
+                case 4:
+                    return j_i_case[50];
+                case 5:
+                    return maytag[0];
+                case 6:
+                    return gen_mills[50];
+                case 7:
+                    return am_motors[50];
+                case 8:
+                    return western_pub[0];
+                default:
+                    Console.WriteLine("Enter wrong number!\n");
+                    return -1;
+            }
+        }
         public void Show()
         {
             Console.WriteLine("Here is the Stocket Market right now: \n");
@@ -96,7 +110,7 @@ namespace stock_market
             Console.WriteLine("        Western Pub: {0}\n", western_pub[current_place]);
             Console.WriteLine("------------------\n\n");
         } //done, shows the current price of each stock
-        public void Fill()
+        public Market()
         {
             current_place = 25;
             for (int x = 0; x < 51; x++)
@@ -131,10 +145,6 @@ namespace stock_market
                 am_motors[x] = 110 - (x * 2);
                 western_pub[x] = 10 + (x * 2);
             }
-        } //done, fill the stock market with the right numbers at the start of the game
-        public Market()
-        {
-            Fill();
         } //done, calls fill because a new market was created
     }
 }

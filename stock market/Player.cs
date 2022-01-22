@@ -22,32 +22,7 @@ namespace stock_market
         private readonly Start_Board Policeman = new Start_Board(2);
         private readonly Start_Board Doctor = new Start_Board(3);
         private readonly Start_Board Deep_Sea_Diver = new Start_Board(4);
-        public void Move_position() 
-        {
-            int num = roll[0] + roll[1];
-            while (num > 0)
-            {
-                if (position.movement == 1)
-                {
-                    position_num--;
-                }
-                else if (position.movement == 2)
-                {
-                    position_num++;
-                }
-                if (position_num > 48)
-                {
-                    position_num = 1;
-                }
-                else if (position_num < 1)
-                {
-                    position_num = 48;
-                }
-                num--;
-            }
-            position = board[position_num];
-        }
-        public void Show() 
+        private void Show() 
         {
             Console.WriteLine("{0}, {1}, here is your stats\n", color_name, name);
             Console.WriteLine("----------------------\n");
@@ -66,16 +41,15 @@ namespace stock_market
             Console.WriteLine("        Western Pub: {0}\n", stocks[7]);
             Console.WriteLine("----------------------\n\n");
         } //check 1/21
-        public void Roll() 
+        private void Roll() 
         {
             // creates an array containing two random numbers(1-6) to act as our dice. Displays the two numbers to the player. Then calls player_move to move the player around the board.
             var rand = new Random();
             roll[0] = rand.Next(1,6);
             roll[1] = rand.Next(1,6);
             Console.WriteLine("{0}, {1} rolled {2} {3}.\n", name,color_name, roll[0], roll[1]);
-            //player_move(size, p,sm);  //lets make it separte 
         } //check 1/21
-        public void Work_pay(int size, Player[] p, int work)
+        private void Work_pay(int size, Player[] p, int work)
         {
             //set pay to the right amount of money based on which work was sent to this function.
             //Use this function when some has rolled and you need to pay every player who is in a certian occupation.
@@ -112,7 +86,7 @@ namespace stock_market
                 }
             }
         }//check 1/21
-        public void Change_job() 
+        private void Change_job() 
         { 
             //give the options on what the player can switch to, then displays the changed information.
             int choice = 0;
@@ -150,10 +124,10 @@ namespace stock_market
                         choice = 7;
                         break;
                     case 5:
-                        Prospector.show();
-                        Policeman.show();
-                        Doctor.show();
-                        Deep_Sea_Diver.show();
+                        Prospector.Show();
+                        Policeman.Show();
+                        Doctor.Show();
+                        Deep_Sea_Diver.Show();
                         choice = 0;
                         break;
                     case 6:
@@ -170,7 +144,7 @@ namespace stock_market
             }
             Console.WriteLine("{0}, {1} changed jobs successfully.\n", name, color_name);
         } //done 1/21
-        public int Check_roll()
+        private int Check_roll()
         {
             // for each job it checks if the two random numbers meet the job requirements, returns the number corresponding to job
 
@@ -203,7 +177,7 @@ namespace stock_market
                 return 0;
             }
         } //return the num for the job that is getting paid. check 1/21
-        public void Player_move(Market sm)
+        private void Move()
         {
             int choice;
             //if player is still in "work"
@@ -252,38 +226,51 @@ namespace stock_market
                     Console.WriteLine("{0} is moving out of the work phase of the game and is now on the board!\n",color_name);
                 }
             }
-            //if the player is  not work
+            //if the player is not working
             if(work == -1)
             {
                 //check if on a starting square
                 if (position == board[1] || position == board[13] || position == board[37] || position == board[25])
                 {
-                    //check if the roll was even
+                    //if the roll was even
                     if ((roll[0] + roll[1]) % 2 == 0)
                     {
                         //move the direction of the even arrow, move right
                         position.movement = 2;
-                        Move_position();
                     }
-                    //the roll was not even so its odd
+                    //if the roll was odd
                     else
                     {
                         //move the direction of the odd arrow, move left
                         position.movement = 1;
-                        Move_position();
                     }
                 }
-                //on a normal square
-                else
+                //move
+                int num = roll[0] + roll[1];
+                while (num > 0)
                 {
-                    //move in the direction of the arrow
-                    Move_position(); 
+                    if (position.movement == 1)
+                    {
+                        position_num--;
+                    }
+                    else if (position.movement == 2)
+                    {
+                        position_num++;
+                    }
+                    if (position_num > 48)
+                    {
+                        position_num = 1;
+                    }
+                    else if (position_num < 1)
+                    {
+                        position_num = 48;
+                    }
+                    num--;
                 }
-                //move stock market
-                sm.Inc(position.move, position.direction);
+                position = board[position_num];
             }
-        }
-        public int Check_stock(int stock_num, int num) 
+        } //check 1/21
+        private int Check_stock(int stock_num, int num) 
         {
             if(stocks[stock_num] >= num)
             {
@@ -294,164 +281,177 @@ namespace stock_market
                 return 0;
             }
         } //check 1/21, stock_num is which stock you want to check, and num is the number of shares that you want to make sure the player has
-        public int Sell_stock(Market sm) 
+        private int Sell_stock(Market sm) 
         {
+            int choice = 0, cost=0, num, check=0;
             //forced selling
-
-            //for normal selling
-            int choice, cost=0, num, check=0;
-            Show();
-            //show the player their stats
-            //then ask which stock the player wants to sell
-            //and how much of the stock they want to sell
-            while (check == 0)
+            if (position.unqiue == 1)
             {
-                Console.WriteLine("Which stock would you like to sell?\n" +
-                                  "     1) Woolworth\n" +
-                                  "     2) Aloca\n" +
-                                  "     3) Int. Shoe\n" +
-                                  "     4) J.I. Case\n" +
-                                  "     5) Maytag\n" +
-                                  "     6) Gen Mills\n" +
-                                  "     7) A.M. Motors\n" +
-                                  "     8) Western Pub\n" +
-                                  "     9) Cancel\n");
-                choice = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("How many shares of that stock do you want to sell?\n");
-                num = Convert.ToInt32(Console.ReadLine());
-                switch (choice)
+                num = stocks[position.stock_name_num - 1];
+                //cost =         lowest stock market price   * the number of shares the player has of that stock
+                cost = sm.Find_base(position.stock_name_num) * num;
+                //add the money the player made by selling to their money var
+                money += cost;
+                //reset the stock var to show that they do not have any shares of the stock they just sold
+                stocks[position.stock_name_num - 1] = 0;
+                //display the information to the player
+                Console.WriteLine("You had {0} shares of {1}, selling those share(s) you gained {3}", num, position.title, cost);
+            }
+            //for normal selling
+            else
+            {
+                Show();
+                //show the player their stats
+                //then ask which stock the player wants to sell
+                //and how much of the stock they want to sell
+                while (check == 0)
                 {
-                    case 1:
-                        if (Check_stock(1,num)== 1)
-                        {
-                            cost = num * sm.woolwth[sm.current_place];
-                            money += cost;
-                            //stocks[0] = stocks[0] - num;
-                            stocks[0] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough Woolworth stock.\n");
+                    Console.WriteLine("Which stock would you like to sell?\n" +
+                                      "     1) Woolworth\n" +
+                                      "     2) Aloca\n" +
+                                      "     3) Int. Shoe\n" +
+                                      "     4) J.I. Case\n" +
+                                      "     5) Maytag\n" +
+                                      "     6) Gen Mills\n" +
+                                      "     7) A.M. Motors\n" +
+                                      "     8) Western Pub\n" +
+                                      "     9) Cancel\n");
+                    choice = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("How many shares of that stock do you want to sell?\n");
+                    num = Convert.ToInt32(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            if (Check_stock(1, num) == 1)
+                            {
+                                cost = num * sm.woolwth[sm.current_place];
+                                money += cost;
+                                stocks[0] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough Woolworth stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 2:
+                            if (Check_stock(2, num) == 1)
+                            {
+                                cost = num * sm.aloca[sm.current_place];
+                                money += cost;
+                                stocks[1] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough Aloca stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 3:
+                            if (Check_stock(3, num) == 1)
+                            {
+                                cost = num * sm.intshoe[sm.current_place];
+                                money += cost;
+                                stocks[2] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough Int. Shoe stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 4:
+                            if (Check_stock(4, num) == 1)
+                            {
+                                cost = num * sm.j_i_case[sm.current_place];
+                                money += cost;
+                                stocks[3] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough J.I. Case stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 5:
+                            if (Check_stock(5, num) == 1)
+                            {
+                                cost = num * sm.maytag[sm.current_place];
+                                money += cost;
+                                stocks[4] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough Maytag stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 6:
+                            if (Check_stock(6, num) == 1)
+                            {
+                                cost = num * sm.gen_mills[sm.current_place];
+                                money += cost;
+                                stocks[5] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough Gen Mills stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 7:
+                            if (Check_stock(7, num) == 1)
+                            {
+                                cost = num * sm.am_motors[sm.current_place];
+                                money += cost;
+                                stocks[6] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough A.M. Motors stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 8:
+                            if (Check_stock(8, num) == 1)
+                            {
+                                cost = num * sm.western_pub[sm.current_place];
+                                money += cost;
+                                stocks[7] -= num;
+                                check = 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have enough Western Pub stock.\n");
+                                check = 0;
+                            }
+                            break;
+                        case 9:
+                            Console.WriteLine("Canceling the choice of selling stock.\n");
                             check = 0;
-                        }
-                        break;
-                    case 2:
-                        if (Check_stock(2, num) == 1)
-                        {
-                            cost = num * sm.aloca[sm.current_place];
-                            money += cost;
-                            stocks[1] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough Aloca stock.\n");
+                            break;
+                        default:
+                            Console.WriteLine("Entered wrong number\n");
                             check = 0;
-                        }
-                        break;
-                    case 3:
-                        if (Check_stock(3, num) == 1)
-                        {
-                            cost = num * sm.intshoe[sm.current_place];
-                            money += cost;
-                            stocks[2] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough Int. Shoe stock.\n");
-                            check = 0;
-                        }
-                        break;
-                    case 4:
-                        if (Check_stock(4, num) == 1)
-                        {
-                            cost = num * sm.j_i_case[sm.current_place];
-                            money += cost;
-                            stocks[3] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough J.I. Case stock.\n");
-                            check = 0;
-                        }
-                        break;
-                    case 5:
-                        if (Check_stock(5, num) == 1)
-                        {
-                            cost = num * sm.maytag[sm.current_place];
-                            money += cost;
-                            stocks[4] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough Maytag stock.\n");
-                            check = 0;
-                        }
-                        break;
-                    case 6:
-                        if (Check_stock(6, num) == 1)
-                        {
-                            cost = num * sm.gen_mills[sm.current_place];
-                            money += cost;
-                            stocks[5] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough Gen Mills stock.\n");
-                            check = 0;
-                        }
-                        break;
-                    case 7:
-                        if (Check_stock(7, num) == 1)
-                        {
-                            cost = num * sm.am_motors[sm.current_place];
-                            money += cost;
-                            stocks[6] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough A.M. Motors stock.\n");
-                            check = 0;
-                        }
-                        break;
-                    case 8:
-                        if (Check_stock(8, num) == 1)
-                        {
-                            cost = num * sm.western_pub[sm.current_place];
-                            money += cost;
-                            stocks[7] -= num;
-                            check = 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have enough Western Pub stock.\n");
-                            check = 0;
-                        }
-                        break;
-                    case 9:
-                        Console.WriteLine("Canceling the choice of selling stock.\n");
-                        check = 0;
-                        break;
-                    default:
-                        Console.WriteLine("Entered wrong number\n");
-                        check = 0;
-                        break;
-                }
-                if (check == 1)
-                {
-                    Show();
-                    Console.WriteLine("You gained %d\n", cost);
+                            break;
+                    }
+                    if (check == 1)
+                    {
+                        Show();
+                        Console.WriteLine("You gained %d\n", cost);
+                    }
                 }
             }
             return 0;
-        } //check 1/21, not done, need forced selling
-        public void Buy_stock(Market sm)
+        } //check 1/21
+        private void Buy_stock(Market sm)
         {
             int cost, current_price, bought = 0, shares = 0, choice=0;
             while (choice == 0)
@@ -532,6 +532,168 @@ namespace stock_market
                 }
             }
         } //check 1/21
+        public void Turn(Market sm, Player[] p, int size)
+        {
+            int choice, end_turn = 0;
+            while (end_turn == 0)
+            {
+                //The options during a players turn, which is stored into choice
+                Console.WriteLine("It's {0},{1} turn!\n" +
+                    "Here are your options: \n" +
+                    "1)Roll\n" +
+                    "2)Change Jobs/Quit Working - only allowed before rolling\n" +
+                    "3)Sell Stock - ONLY ALLOWED BEFORE ROLLING\n" +
+                    "4)Show the Stock Market - only allowed before rolling\n" +
+                    "5)Show My Stock - only allowed before rolling\n", name, color_name);
+                choice = Convert.ToInt32(Console.ReadLine());
+                //the switch will handle each option that a player can choose during a turn
+                switch (choice)
+                {
+                    case 1:
+                        //roll
+                        Roll();
+                        Work_pay(size, p, Check_roll());
+                        Move();
+                        //if not working 
+                        if (work == -1)
+                        {
+                            //show the player the square they landed on
+                            Console.WriteLine("Player: {0},{1}, here is where you are on the board.\n", name, color_name);
+                            position.Show();
+                            //move the stock market
+                            sm.Move(position);
+                            //check if the player gets a div
+                            if (stocks[position.stock_name_num] > 0)
+                            {
+                                // ( div           *    the amount of stock the player has )
+                                money += (position.div * stocks[position.stock_name_num]);
+                                Console.WriteLine("Player: {0},{1} you got %d in dividends\n", name, color_name);
+                                Show();
+                            }
+                            //give the player the option to buy
+                            // if there is no stock meeting
+                            if (position.meeting == -1)
+                            {
+                                //ask if the player wants to buy stock
+                                int choice_buy = 0;
+                                while (choice_buy == 0)
+                                {
+                                    //show the player the current stock market price for the stock
+                                    Console.WriteLine("The current price of {0} is %d\n", position.title, sm.Find(position_num));
+                                    //then ask if they wannt to buy
+                                    Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", position.title);
+                                    choice_buy = Convert.ToInt32(Console.ReadLine());
+                                    switch (choice_buy)
+                                    {
+                                        // they want to buy stock, need to now ask how many shares
+                                        case 1:
+                                            Buy_stock(sm);
+                                            break;
+                                        case 2:
+                                            Console.WriteLine("You choose to not buy any.\n");
+                                            break;
+                                        default:
+                                            Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                                            choice_buy = 0;
+                                            break;
+                                    }
+                                }
+                            }
+                            //if there is a stock meeting
+                            else if (position.meeting == 1)
+                            {
+                                //ask if they want to buy stock, while telling them that they can only buy one stock since it is a stock meeting square
+                                int choice_buy = 0;
+                                while (choice_buy == 0)
+                                {
+                                    //show the player their stats
+                                    Show();
+                                    //show the player the current stock market price for the stock
+                                    Console.WriteLine("The current price of {0} is %d\n", position.title, sm.Find(position_num));
+                                    //ask the player if the want to buy a share
+                                    Console.WriteLine("The square you landed on is a stockholders meeting, therefore there is a purchase limit of one share." +
+                                    " Do you want to buy {0} stock? Yes(1) or No(2)\n", position.title);
+                                    choice_buy = Convert.ToInt32(Console.ReadLine());
+                                    switch (choice_buy)
+                                    {
+                                        //buy one stock
+                                        case 1:
+                                            Buy_stock(sm);
+                                            break;
+                                        // not buying anything
+                                        case 2:
+                                            Console.WriteLine("You choose to not buy any.\n");
+                                            break;
+                                        //error message
+                                        default:
+                                            Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                                            choice_buy = 0;
+                                            break;
+                                    }
+                                }
+                                //ask if the player wants to go inot the stockholders meeting
+                                choice_buy = 0;
+                                while (choice_buy == 0)
+                                {
+                                    Console.WriteLine("Do you want to go into the stockholders meeting? Yes(1) or No(2)\n");
+                                    choice_buy = Convert.ToInt32(Console.ReadLine());
+                                    switch (choice_buy)
+                                    {
+                                        case 1:
+                                            //check if the player can go into the meeting,
+                                            //check if they have at least one stock of the stock meeting they are wanting to go into
+                                            if (stocks[position.stock_name_num - 1] > 0)
+                                            {
+                                                //go into the meeting 
+                                                meeting = 1;
+                                            }
+                                            else
+                                            {
+                                                //can't go into the meeting
+                                                meeting = 2;
+                                                Console.WriteLine("Sorry, you do not have at least one stock which is required to be able to go into the stockholders meeting.\n");
+                                                Show();
+                                            }
+                                            break;
+                                        case 2:
+                                            //not going into the meeting
+                                            meeting = 2;
+                                            Console.WriteLine("You are not going into the stockholders meeting.\n");
+                                            break;
+                                        default:
+                                            //error message
+                                            Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                                            choice_buy = 0;
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                        end_turn = 1;
+                        break;
+                    case 2:
+                        //Change Jobs or Quit Job, players can do this before rolling only
+                        Change_job();
+                        break;
+                    case 3:
+                        //Sell Stock, a player can only do this before rolling
+                        Sell_stock(sm);
+                        break;
+                    case 4:
+                        //Show Stock Market
+                        sm.Show();
+                        break;
+                    case 5:
+                        //Show players hand
+                        Show();
+                        break;
+                    default:
+                        //Error message
+                        Console.WriteLine("Enter wrong number or invalid character, try again\n");
+                        break;
+                }
+            }
+        } // check 1/21
         public Player()
         {
             //seting up the player's information
@@ -557,24 +719,14 @@ namespace stock_market
                 {
                     work = temp;
                     money = 0;
-                    switch (work)
+                    work_name = work switch
                     {
-                        case 1:
-                            work_name = "Prospector";
-                            break;
-                        case 2:
-                            work_name = "Policeman";
-                            break;
-                        case 3:
-                            work_name = "Doctor";
-                            break;
-                        case 4:
-                            work_name = "Deep Sea Diver";
-                            break;
-                        default:
-                            work_name = "None";
-                            break;
-                    }
+                        1 => "Prospector",
+                        2 => "Policeman",
+                        3 => "Doctor",
+                        4 => "Deep Sea Diver",
+                        _ => "None",
+                    };
                     for (int loop = 0; loop < 8; loop++)
                     {
                         stocks[loop] = 0;
@@ -584,10 +736,10 @@ namespace stock_market
                 }
                 else
                 {
-                    Prospector.show();
-                    Policeman.show();
-                    Doctor.show();
-                    Deep_Sea_Diver.show();
+                    Prospector.Show();
+                    Policeman.Show();
+                    Doctor.Show();
+                    Deep_Sea_Diver.Show();
                 }
             }
         }

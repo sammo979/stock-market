@@ -45,7 +45,7 @@ namespace stock_market
                 salary = 300;
             }
         } //done, fill the start board with the right information
-        public void show()
+        public void Show()
         {
             //print out the description of the work position
             Console.WriteLine("{0}", title);

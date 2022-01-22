@@ -308,6 +308,10 @@ namespace stock_market
                     num--;
                 }
                 position = board[position_num];
+                if(position.meeting == 1)
+                {
+                    meeting = 1;
+                }
             }
         } //check 1/21
         private int Check_stock(int stock_num, int num) 
@@ -651,7 +655,7 @@ namespace stock_market
             while (choice == 0)
             {
                 //show the player the current stock market price for the stock
-                Console.WriteLine("The current price of {0} is %d\n", position.title, sm.Find(position_num));
+                Console.WriteLine("The current price of {0} is {1}\n", position.title, sm.Find(position.stock_name_num));
                 //then ask if they wannt to buy
                 Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", position.title);
                 choice = Convert.ToInt32(Console.ReadLine());
@@ -823,8 +827,9 @@ namespace stock_market
                                 Broke(sm);
                             }
                             //give the player the option to buy
+                            Buy_stock(sm);
                             // if there is no stock meeting
-                            else if (position.meeting == -1 && position.unqiue != 1 && position.unqiue != 2 && position.unqiue != 3)
+                            /*else if (position.meeting == -1 && position.unqiue != 1 && position.unqiue != 2 && position.unqiue != 3)
                             {
                                 //ask if the player wants to buy stock
                                 int choice_buy = 0;
@@ -850,9 +855,9 @@ namespace stock_market
                                             break;
                                     }
                                 }
-                            }
+                            }*/
                             //if there is a stock meeting
-                            else if (position.meeting == 1)
+                            /*else if (position.meeting == 1)
                             {
                                 //ask if they want to buy stock, while telling them that they can only buy one stock since it is a stock meeting square
                                 int choice_buy = 0;
@@ -861,7 +866,7 @@ namespace stock_market
                                     //show the player their stats
                                     Show();
                                     //show the player the current stock market price for the stock
-                                    Console.WriteLine("The current price of {0} is %d\n", position.title, sm.Find(position_num));
+                                    Console.WriteLine("The current price of {0} is {1}\n", position.title, sm.Find(position.stock_name_num));
                                     //ask the player if the want to buy a share
                                     Console.WriteLine("The square you landed on is a stockholders meeting, therefore there is a purchase limit of one share." +
                                     " Do you want to buy {0} stock? Yes(1) or No(2)\n", position.title);
@@ -882,7 +887,7 @@ namespace stock_market
                                             choice_buy = 0;
                                             break;
                                     }
-                                }
+                                }*/
                                 //ask if the player wants to go inot the stockholders meeting
                                 choice_buy = 0;
                                 while (choice_buy == 0)

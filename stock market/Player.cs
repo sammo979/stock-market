@@ -41,6 +41,36 @@ namespace stock_market
             Console.WriteLine("        Western Pub: {0}\n", stocks[7]);
             Console.WriteLine("----------------------\n\n");
         } //check 1/21
+        public void Ending(Market sm)
+        {
+            //ending credits, show each players stats at the end of game
+            Console.WriteLine("{0}, {1}, here is your stats\n", color_name, name);
+            Console.WriteLine("--------------------------\n");
+            Console.WriteLine("Money: {0}\n", money);
+            Console.WriteLine("--------------------------\n");
+            Console.WriteLine("Stocks: \n");
+            Console.WriteLine("        Woolwth: {0} = {1}\n", stocks[0], stocks[0] * sm.Find(1));
+            Console.WriteLine("        Aloca: {0} = {1}\n", stocks[1], stocks[1] * sm.Find(2));
+            Console.WriteLine("        Int Shoe: {0} = {1}\n", stocks[2], stocks[2] * sm.Find(3));
+            Console.WriteLine("        J.I. Case: {0} = {1}\n", stocks[3], stocks[3] * sm.Find(4));
+            Console.WriteLine("        Maytag: {0} = {1}\n", stocks[4], stocks[4] * sm.Find(5));
+            Console.WriteLine("        Gen Mills: {0} = {1}\n", stocks[5], stocks[5] * sm.Find(6));
+            Console.WriteLine("        A.M. Motors: {0} = {1}\n", stocks[6], stocks[6] * sm.Find(7));
+            Console.WriteLine("        Western Pub: {0} = {1}\n", stocks[7], stocks[7] * sm.Find(8));
+            Console.WriteLine("------------------------------\n");
+            Console.WriteLine("Total: {0}\n",Total(sm));
+            Console.WriteLine("------------------------------\n");
+        }
+        public int Total(Market sm)
+        {
+            int sum = money;
+            for(int x=0; x<8; x++)
+            {
+                //sum = sum + ( # of shares * current price of stock)
+                sum += (stocks[x] * sm.Find(x + 1));
+            }
+            return sum;
+        }
         private void Roll() 
         {
             // creates an array containing two random numbers(1-6) to act as our dice. Displays the two numbers to the player. Then calls player_move to move the player around the board.

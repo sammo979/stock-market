@@ -8,7 +8,7 @@ namespace stock_market
         static void Main()
         {
             //intallizing variables
-            int end_game = 0, x, size;
+            int end_game = 0, x, size, total;
             Market sm = new Market();//making an instance of the class market to use for the game
             Console.WriteLine("Welcome to Stock Market the board game!\n");
             // finding out the number of players
@@ -25,17 +25,33 @@ namespace stock_market
             //starting the game, end_game var is to tell when the game is over
             while (end_game == 0)
             {
-                players[x].Turn(sm, players,size);  
-                x++; // inc x var to go to the next player
-                if(x >= size) // check to make sure we don't go out of bounds when accessing the player array
-                                  // ex: if there is only 2 players or size 2 the program should do player 0 turn(x=0),
-                                  // then player 1 turn(x=1), when x=2 it should go back to player 0 turn(x=0).
-                                  // And it would be one round of turns done.
+                total = players[x].Total(sm);
+                if (total >= 100000)
                 {
-                    x = 0;
+                    Console.WriteLine("Player: {0}, {1}, you have just won Stock Market Board Game!!!!!!!\n" +
+                        "Ending with a total of {2}!\n", players[x].name, players[x].color_name, total);
+                    end_game = 1;
                 }
-                Console.WriteLine("\n");//idk if we need this?, at the end of the turn make a new line to separate the players turns
+                else
+                {
+                    players[x].Turn(sm, players, size);
+                    x++; // inc x var to go to the next player
+                    if (x >= size) // check to make sure we don't go out of bounds when accessing the player array
+                                   // ex: if there is only 2 players or size 2 the program should do player 0 turn(x=0),
+                                   // then player 1 turn(x=1), when x=2 it should go back to player 0 turn(x=0).
+                                   // And it would be one round of turns done.
+                    {
+                        x = 0;
+                    }
+                    Console.WriteLine("\n");//at the end of the turn make a new line to separate the players turns
+                }
             }
+            //show every players stats
+            for(x=0; x<size; x++)
+            {
+                players[x].Ending(sm);
+            }
+            Console.WriteLine("Thank you for playing!\n");
         }
     }
 }

@@ -89,6 +89,7 @@ namespace stock_market
             roll[0] = rand.Next(1,6);
             roll[1] = rand.Next(1,6);
             Console.WriteLine("{0}, {1} rolled {2} {3}.\n", name,color_name, roll[0], roll[1]);
+            //
         } //check 1/21
         private void Work_pay(int size, Player[] p, int work)
         {
@@ -267,7 +268,7 @@ namespace stock_market
                 }
             }
             //if the player is not working
-            if(work == -1)
+            else if(work == -1)
             {
                 //check if on a starting square
                 if (position == board[1] || position == board[13] || position == board[37] || position == board[25])
@@ -712,7 +713,7 @@ namespace stock_market
                                 //stocks[position.stock_name_num - 1] = stocks[position.stock_name_num - 1] + shares;
                                 stocks[position.stock_name_num - 1] += shares;
                                 //show the player what happen
-                                Console.WriteLine("Player: {0], {1}, you wanted to buy %d shares of {2}, with the current stock price of %d, which will cost you %d.\n", name, color_name, shares, position.title, current_price, cost);
+                                Console.WriteLine("Player: {0], {1}, you wanted to buy {2} shares of {3}, with the current stock price of {4}, which will cost you {5}.\n", name, color_name, shares, position.title, current_price, cost); //input string was not in a correct format
                                 Show();
                                 //set bought to 1 to break the while loop
                                 bought = 1;
@@ -798,72 +799,76 @@ namespace stock_market
                             //show the player the square they landed on
                             Console.WriteLine("Player: {0},{1}, here is where you are on the board.\n", name, color_name);
                             position.Show();
-                            //move the stock market
-                            sm.Move(position);
-                            //check if the player gets a div
-                            if (stocks[position.stock_name_num] > 0)
-                            {
-                                // ( div           *    the amount of stock the player has )
-                                money += (position.div * stocks[position.stock_name_num]);
-                                Console.WriteLine("Player: {0},{1} you got {3} in dividends\n", name, color_name, (position.div * stocks[position.stock_name_num]));
-                                Show();
-                            }
                             //if the square is a sell all
-                            if(position.unqiue == 1)
+                            if (position.unqiue == 1)
                             {
                                 Sell_stock(sm);
                             }
                             //broker fee
-                            else if(position.unqiue == 2)
+                            else if (position.unqiue == 2)
                             {
                                 Broker_fee();
                                 Broke(sm);
                             }
                             //100 fee
-                            else if(position.unqiue == 3)
+                            else if (position.unqiue == 3)
                             {
                                 Console.WriteLine("You landed on a $100 fee square.\n");
                                 money -= 100;
                                 Broke(sm);
                             }
-                            //give the player the option to buy
-                            Buy_stock(sm);
-                            //ask if the player wants to go inot the stockholders meeting
-                            if(position.meeting == 1)
-                            { 
-                                choice = 0;
-                                while (choice == 0)
+                            //normal square
+                            else
+                            {
+                                //move the stock market
+                                sm.Move(position);
+                                //check if the player gets a div
+                                if (stocks[position.stock_name_num] > 0)
                                 {
-                                    Console.WriteLine("Do you want to go into the stockholders meeting? Yes(1) or No(2)\n");
-                                    choice= Convert.ToInt32(Console.ReadLine());
-                                    switch (choice)
+                                    // ( div           *    the amount of stock the player has )
+                                    money += (position.div * stocks[position.stock_name_num]);
+                                    Console.WriteLine("Player: {0},{1} you got {3} in dividends\n", name, color_name, (position.div * stocks[position.stock_name_num]));
+                                    Show();
+                                }
+                                //give the player the option to buy
+                                Buy_stock(sm);
+                                //ask if the player wants to go inot the stockholders meeting
+                                if (position.meeting == 1)
+                                {
+                                    choice = 0;
+                                    while (choice == 0)
                                     {
-                                        case 1:
-                                            //check if the player can go into the meeting,
-                                            //check if they have at least one stock of the stock meeting they are wanting to go into
-                                            if (stocks[position.stock_name_num - 1] > 0)
-                                            {
-                                                //go into the meeting 
-                                                meeting = 1;
-                                            }
-                                            else
-                                            {
-                                                //can't go into the meeting
+                                        Console.WriteLine("Do you want to go into the stockholders meeting? Yes(1) or No(2)\n");
+                                        choice = Convert.ToInt32(Console.ReadLine());
+                                        switch (choice)
+                                        {
+                                            case 1:
+                                                //check if the player can go into the meeting,
+                                                //check if they have at least one stock of the stock meeting they are wanting to go into
+                                                if (stocks[position.stock_name_num - 1] > 0)
+                                                {
+                                                    //go into the meeting 
+                                                    meeting = 1;
+                                                }
+                                                else
+                                                {
+                                                    //can't go into the meeting
+                                                    meeting = 2;
+                                                    Console.WriteLine("Sorry, you do not have at least one stock which is required to be able to go into the stockholders meeting.\n");
+                                                    Show();
+                                                }
+                                                break;
+                                            case 2:
+                                                //not going into the meeting
                                                 meeting = 2;
-                                                Console.WriteLine("Sorry, you do not have at least one stock which is required to be able to go into the stockholders meeting.\n");
-                                                Show();
-                                            }
-                                            break;
-                                        case 2:
-                                            //not going into the meeting
-                                            meeting = 2;
-                                            Console.WriteLine("You are not going into the stockholders meeting.\n");
-                                            break;
-                                        default:
-                                            //error message
-                                            Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
-                                            choice = 0;
-                                            break;
+                                                Console.WriteLine("You are not going into the stockholders meeting.\n");
+                                                break;
+                                            default:
+                                                //error message
+                                                Console.WriteLine("Entered wrong number yes(1) or no(2)\n");
+                                                choice = 0;
+                                                break;
+                                        }
                                     }
                                 }
                             }

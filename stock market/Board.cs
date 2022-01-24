@@ -15,6 +15,8 @@ namespace stock_market
         public int move; // how much to move the stock market
         public int meeting; // if the square allows for a meeting 1 for yes, -1 for no
         public int unqiue; // 1 if sell all square, 2 if pay broker fee, 3 if 100 fee
+        public Stockholders_Meeting stockhold; //if the square has a stock holder meeting then this will have that track
+        
         public void Show()
         {
             Console.WriteLine("Title: {0}\n",title);
@@ -73,6 +75,7 @@ namespace stock_market
                     move = 3;
                     meeting = 1;
                     unqiue = -1;
+                    stockhold = new Stockholders_Meeting(5);
                     break;
                 case 5:
                     title = "Int. Shoe\n";
@@ -119,7 +122,7 @@ namespace stock_market
                     unqiue = 1;
                     break;
                 case 9:
-                    title = "Aloca\n";
+                    title = "Alcoa\n";
                     description = "None\n";
                     div = 4;
                     stock_name_num = 2;
@@ -138,6 +141,7 @@ namespace stock_market
                     movement = 1;
                     move = 3;
                     meeting = 1;
+                    stockhold = new Stockholders_Meeting(7);
                     unqiue = -1;
                     break;
                 case 11:
@@ -202,6 +206,7 @@ namespace stock_market
                     movement = 2;
                     move = 3;
                     meeting = 1;
+                    stockhold = new Stockholders_Meeting(8);
                     unqiue = -1;
                     break;
                 case 17:
@@ -268,10 +273,11 @@ namespace stock_market
                     movement = 1;
                     move = 3;
                     meeting = 1;
+                    stockhold = new Stockholders_Meeting(6);
                     unqiue = -1;
                     break;
                 case 23:
-                    title = "Aloca\n";
+                    title = "Alcoa\n";
                     description = "None\n";
                     div = 4;
                     stock_name_num = 2;
@@ -334,6 +340,7 @@ namespace stock_market
                     movement = 2;
                     move = 3;
                     meeting = 1;
+                    stockhold = new Stockholders_Meeting(3);
                     unqiue = -1;
                     break;
                 case 29:
@@ -400,6 +407,7 @@ namespace stock_market
                     movement = 1;
                     move = 3;
                     meeting = 1;
+                    stockhold = new Stockholders_Meeting(1);
                     unqiue = -1;
                     break;
                 case 35:
@@ -458,7 +466,7 @@ namespace stock_market
                     unqiue = -1;
                     break;
                 case 40:
-                    title = "Aloca\n";
+                    title = "Alcoa\n";
                     description = "Purchase Limit One Share\n";
                     div = 4;
                     stock_name_num = 2;
@@ -466,6 +474,7 @@ namespace stock_market
                     movement = 2;
                     move = 3;
                     meeting = 1;
+                    stockhold = new Stockholders_Meeting(2);
                     unqiue = -1;
                     break;
                 case 41:
@@ -532,6 +541,7 @@ namespace stock_market
                     movement = 1;
                     move = 3;
                     meeting = 1;
+                    stockhold = new Stockholders_Meeting(4);
                     unqiue = -1;
                     break;
                 case 47:

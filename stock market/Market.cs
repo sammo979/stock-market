@@ -20,13 +20,15 @@ namespace stock_market
         {
             int x;
             //move the stock market to the new place
+            //down
             if (b.direction == 1)
             {
-                current_place -= b.move;
+                current_place += b.move;
             }
+            //up
             else
             {
-                current_place += b.move;
+                current_place -= b.move;
             }
             //check if current_place is out of bounds
             if (current_place < 0)

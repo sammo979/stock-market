@@ -72,6 +72,48 @@ namespace stock_market
             Console.WriteLine("Total: {0}\n",Total(sm));
             Console.WriteLine("------------------------------\n");
         }
+        private void Done_working()
+        {
+            work = -1;
+            work_name = "None";
+            pay = 0;
+            int check = 0, choice;
+            while (check == 0)
+            {
+                // 1 with woolworth next, gen mills 13 int shoe, am motors 25 western publishing, ji case 37 maytag
+                Console.WriteLine("{0}: You have passed the limit for working or have decided to quit working. Pick which starting square you want.\n" +
+                "1) which is by Western Publ. and AM. Motors Stockholders Meeting\n" +
+                "2) which is by J.I. Case and Maytag Stockholders Meeting\n" +
+                "3) which is by Aloca and Woolworth Stockholders Meeting\n" +
+                "4) which is by Int. Shoe and Gen Mills Stockholders Meeting\n", color_name);
+                choice = Convert.ToInt32(Console.ReadLine());
+                work = -1;
+                work_name = "none";
+                switch (choice)
+                {
+                    case 1:
+                        position = board[25];
+                        check = 1;
+                        break;
+                    case 2:
+                        position = board[37];
+                        check = 1;
+                        break;
+                    case 3:
+                        position = board[1];
+                        check = 1;
+                        break;
+                    case 4:
+                        position = board[13];
+                        check = 1;
+                        break;
+                    default:
+                        Console.WriteLine("Enter wrong number\n");
+                        break;
+                }
+            }
+            Console.WriteLine("{0} is moving out of the work phase of the game and is now on the board!\n", color_name);
+        }
         public int Total(Market sm)
         {
             int sum = money;
@@ -173,9 +215,7 @@ namespace stock_market
                         choice = 0;
                         break;
                     case 6:
-                        work_name = "Done";
-                        work = -1;
-                        pay = 0;
+                        Done_working();
                         choice = 6;
                         break;
                     default:
@@ -220,55 +260,8 @@ namespace stock_market
         } //return the num for the job that is getting paid. check 1/21
         private void Move()
         {
-            int choice;
-            //if player is still in "work"
-            if (work == 1 || work == 2 || work == 3 || work == 4)
-            {
-                //check if the player has made enough money to get kick out of "work",
-                //the rule is that once you hit 1000 or more you can only collect salary until your next turn,
-                //mine only allows you to collect if you got more than 1000 on someones elses turn
-                if (money >= 1000) 
-                {
-                    int check = 0;
-                    while (check == 0)
-                    { 
-                        // 1 with woolworth next, gen mills 13 int shoe, am motors 25 western publishing, ji case 37 maytag
-                        Console.WriteLine("{0}: You have passed the limit for working. Pick which starting square you want.\n" +
-                        "1) which is by Western Publ. and AM. Motors Stockholders Meeting\n" +
-                        "2) which is by J.I. Case and Maytag Stockholders Meeting\n" +
-                        "3) which is by Aloca and Woolworth Stockholders Meeting\n" +
-                        "4) which is by Int. Shoe and Gen Mills Stockholders Meeting\n", color_name);
-                        choice = Convert.ToInt32(Console.ReadLine());
-                        work = -1;
-                        work_name = "none";
-                        switch (choice)
-                        {
-                            case 1:
-                                position = board[25];
-                                check = 1;
-                                break;
-                            case 2:
-                                position = board[37];
-                                check = 1;
-                                break;
-                            case 3:
-                                position = board[1];
-                                check = 1;
-                                break;
-                            case 4:
-                                position = board[13];
-                                check = 1;
-                                break;
-                            default:
-                                Console.WriteLine("Enter wrong number\n");
-                                break;
-                        }
-                    }
-                    Console.WriteLine("{0} is moving out of the work phase of the game and is now on the board!\n",color_name);
-                }
-            }
             //if the player is not working
-            else if(work == -1)
+            if(work == -1)
             {
                 //check if on a starting square
                 if (position == board[1] || position == board[13] || position == board[37] || position == board[25])
@@ -315,6 +308,15 @@ namespace stock_market
                 }
             }
         } //check 1/21
+        private void Check_money()
+        {
+            //check if the player has made enough money to get kick out of "work",
+            //the rule is that once you hit 1000 or more you can only collect salary until your next turn,
+            if (money >= 1000)
+            {
+                Done_working();
+            }
+        }
         private int Check_stock(int stock_num, int num) 
         {
             if(stocks[stock_num] >= num)
@@ -340,7 +342,7 @@ namespace stock_market
                 //reset the stock var to show that they do not have any shares of the stock they just sold
                 stocks[position.stock_name_num - 1] = 0;
                 //display the information to the player
-                Console.WriteLine("You had {0} shares of {1}, selling those share(s) you gained {3}", num, position.title, cost);
+                Console.WriteLine("You had {0} shares of {1}, selling those share(s) you gained {2}", num, position.title, cost);
             }
             //broke selling
             else if(money <= 0)
@@ -791,6 +793,7 @@ namespace stock_market
                     case 1:
                         //roll
                         Roll();
+                        Check_money();
                         Work_pay(size, p, Check_roll());
                         Move();
                         //if not working 

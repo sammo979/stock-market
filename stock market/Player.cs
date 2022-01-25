@@ -93,19 +93,23 @@ namespace stock_market
                 switch (choice)
                 {
                     case 1:
-                        position = board[25];
+                        position = board[13];
+                        position_num = 13;
                         check = 1;
                         break;
                     case 2:
-                        position = board[37];
+                        position = board[1];
+                        position_num = 1;
                         check = 1;
                         break;
                     case 3:
-                        position = board[1];
+                        position = board[37];
+                        position_num = 37;
                         check = 1;
                         break;
                     case 4:
-                        position = board[13];
+                        position = board[25];
+                        position_num = 25;
                         check = 1;
                         break;
                     default:
@@ -315,9 +319,29 @@ namespace stock_market
                             meeting = 2;
                             //set positon to be the board square that is at the oppiside of the meeting track
                             //move 6 board squares
-                            position_num += position.stockhold.move;
+                            int number = 6;
+                            while (number > 0)
+                            {
+                                if (position.stockhold.move == 1)
+                                {
+                                    position_num++;
+                                }
+                                else if (position.stockhold.move == 2)
+                                {
+                                    position_num--;
+                                }
+                                if (position_num > 48)
+                                {
+                                    position_num = 1;
+                                }
+                                else if (position_num < 1)
+                                {
+                                    position_num = 48;
+                                }
+                                number--;
+                            }
                             //if there is more of the roll left over move that much
-                            if(num > 0)
+                            if (num > 0)
                             {
                                 Move(num);
                             }
@@ -339,9 +363,11 @@ namespace stock_market
                         //move the direction of the odd arrow, move left
                         position.movement = 1;
                     }
+                    // move like normal
+                    int num = roll[0] + roll[1];
+                    Move(num);
                 }
-                //else move like normal
-                else
+                else 
                 {
                     int num = roll[0] + roll[1];
                     Move(num);
@@ -804,7 +830,7 @@ namespace stock_market
                 }
             }
         }
-        public void Turn(Market sm, Player[] p, int size)
+        public void Turn(Market sm, Player[] p, int size, ref int working)
         {
             int choice, end_turn = 0;
             while (end_turn == 0)
@@ -830,16 +856,21 @@ namespace stock_market
                             if (money >= 1000)
                             {
                                 Done_working();
+                                working--;
                             }
                         }
-                        Pay(size, p, Check_roll());
+                        //check if any of the players are still in the working phase
+                        if (working != 0)
+                        {
+                            Pay(size, p, Check_roll());
+                        }
                         Move();
                         //if not working 
                         if (work == -1)
                         {
                             //show the player the square they landed on
                             //if they are in stockholder meeting track
-                            if (stockhold_num > -2)
+                            if (stockhold_num >= -1)
                             {
                                 Console.WriteLine("Player: {0},{1}, you landed on {2} for 1 in the stockholders meeting.\n", name, color_name, position.stockhold.stockholder[stockhold_num]);
                                 int add = stocks[position.stock_name_num - 1] * position.stockhold.stockholder[stockhold_num];
@@ -847,7 +878,7 @@ namespace stock_market
                                 Console.WriteLine("You have gained, {0} shares! Now you have {1} shares.\n", add, stocks[position.stock_name_num - 1]);
                             }
                             //if they are not actively in stockholder meeting track
-                            else if (stockhold_num == -1)
+                            else if (stockhold_num == -2)
                             {
                                 Console.WriteLine("Player: {0},{1}, here is where you are on the board.\n", name, color_name);
                                 position.Show();
@@ -856,12 +887,16 @@ namespace stock_market
                                 if (position.unqiue == 1)
                                 {
                                     Sell_stock(sm);
+                                    //move the stock market
+                                    sm.Move(position);
                                 }
                                 //broker fee
                                 else if (position.unqiue == 2)
                                 {
                                     Broker_fee();
                                     Broke(sm);
+                                    //move the stock market
+                                    sm.Move(position);
                                 }
                                 //100 fee
                                 else if (position.unqiue == 3)
@@ -876,11 +911,11 @@ namespace stock_market
                                     //move the stock market
                                     sm.Move(position);
                                     //check if the player gets a div
-                                    if (stocks[position.stock_name_num] > 0)
+                                    if (stocks[position.stock_name_num-1] > 0)
                                     {
                                         // ( div           *    the amount of stock the player has )
-                                        money += (position.div * stocks[position.stock_name_num]);
-                                        Console.WriteLine("Player: {0},{1} you got {3} in dividends\n", name, color_name, (position.div * stocks[position.stock_name_num]));
+                                        money += (position.div * stocks[position.stock_name_num-1]);
+                                        Console.WriteLine("Player: {0},{1} you got {2} in dividends\n", name, color_name, (position.div * stocks[position.stock_name_num-1]) );
                                         Show();
                                     }
                                     //give the player the option to buy
@@ -952,6 +987,7 @@ namespace stock_market
                         break;
                 }
             }
+
         }
         public Player()
         {

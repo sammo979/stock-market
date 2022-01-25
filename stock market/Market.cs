@@ -33,19 +33,25 @@ namespace stock_market
             //check if current_place is out of bounds
             if (current_place < 0)
             {
-                for (x = 0; current_place < 0; x++)
+                x = current_place * -1;
+                current_place = 0;
+                current_place += x;
+                /*for (x = 0; current_place < 0; x++)
                 {
                     current_place++;
                 }
-                current_place += x;
+                current_place += x;*/
             }
             if (current_place > 50)
             {
-                for (x = 0; current_place > 50; x++)
+                x = current_place - 50;
+                current_place = 50;
+                current_place -= x;
+                /*for (x = 0; current_place > 50; x++)
                 {
                     current_place--;
                 }
-                current_place -= x;
+                current_place -= x;*/
             }
         } //done, move the current place of the stock market
         public int Find(int stock_name_num)

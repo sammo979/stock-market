@@ -23,7 +23,7 @@ namespace stock_market
                     stockholder[6] = 1;
                     stockholder[7] = 2;
                     stockholder[8] = 1;
-                    move = 6;
+                    move = 1;
                     break;
                 case 2:
                     //alcoa, subtract 2
@@ -36,7 +36,7 @@ namespace stock_market
                     stockholder[6] = 1;
                     stockholder[7] = 2;
                     stockholder[8] = 1;
-                    move = -6;
+                    move = 2;
                     break;
                 case 3:
                     //int shoe,subtract,2
@@ -49,7 +49,7 @@ namespace stock_market
                     stockholder[6] = 2;
                     stockholder[7] = 3;
                     stockholder[8] = 1;
-                    move = -6;
+                    move = 2;
                     break;
                 case 4:
                     //ji case add 1
@@ -62,7 +62,7 @@ namespace stock_market
                     stockholder[6] = 3;
                     stockholder[7] = 2;
                     stockholder[8] = 1;
-                    move = 6;
+                    move = 1;
                     break;
                 case 5:
                     //maytag subtract 2
@@ -75,7 +75,7 @@ namespace stock_market
                     stockholder[6] = 3;
                     stockholder[7] = 2;
                     stockholder[8] = 1;
-                    move = -6;
+                    move = 2;
                     break;
                 case 6:
                     //gen mills add,1
@@ -88,7 +88,7 @@ namespace stock_market
                     stockholder[6] = 2;
                     stockholder[7] = 3;
                     stockholder[8] = 1;
-                    move = 6;
+                    move = 1;
                     break;
                 case 7:
                     //am motors  add 1
@@ -101,7 +101,7 @@ namespace stock_market
                     stockholder[6] = 3;
                     stockholder[7] = 2;
                     stockholder[8] = 1;
-                    move = 6;
+                    move = 1;
                     break;
                 case 8:
                     //western pub subtract 2
@@ -114,7 +114,7 @@ namespace stock_market
                     stockholder[6] = 3;
                     stockholder[7] = 2;
                     stockholder[8] = 1;
-                    move = -6;
+                    move = 2;
                     break;
             }
         }

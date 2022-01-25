@@ -8,12 +8,13 @@ namespace stock_market
         static void Main()
         {
             //intallizing variables
-            int end_game = 0, x, size, total;
+            int end_game = 0, x, size, total, working;
             Market sm = new Market();//making an instance of the class market to use for the game
             Console.WriteLine("Welcome to Stock Market the board game!\n");
             // finding out the number of players
             Console.WriteLine("How many players are going to play?\n"); 
             size = Convert.ToInt32(Console.ReadLine());
+            working = size;
             //create an array of players with the size=# of players
             Player[] players = new Player[size];
             //looping throught the array to create each induivual player, setting their job and color etc
@@ -34,7 +35,7 @@ namespace stock_market
                 }
                 else
                 {
-                    players[x].Turn(sm, players, size);
+                    players[x].Turn(sm, players, size, ref working);
                     x++; // inc x var to go to the next player
                     if (x >= size) // check to make sure we don't go out of bounds when accessing the player array
                                    // ex: if there is only 2 players or size 2 the program should do player 0 turn(x=0),

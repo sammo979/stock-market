@@ -889,6 +889,7 @@ namespace stock_market
                                     Sell_stock(sm);
                                     //move the stock market
                                     sm.Move(position);
+                                    Show();
                                 }
                                 //broker fee
                                 else if (position.unqiue == 2)
@@ -897,6 +898,7 @@ namespace stock_market
                                     Broke(sm);
                                     //move the stock market
                                     sm.Move(position);
+                                    Show();
                                 }
                                 //100 fee
                                 else if (position.unqiue == 3)
@@ -904,6 +906,7 @@ namespace stock_market
                                     Console.WriteLine("You landed on a $100 fee square.\n");
                                     money -= 100;
                                     Broke(sm);
+                                    Show();
                                 }
                                 //normal square
                                 else

@@ -383,7 +383,7 @@ namespace stock_market
                     stock_name_num = 2;
                     direction = 2;
                     movement = 1;
-                    move = 3;
+                    move = 5;
                     meeting = -1;
                     unqiue = 1;
                     break;

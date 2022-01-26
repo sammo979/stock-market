@@ -43,6 +43,7 @@ namespace stock_market
                 current_place = 50;
                 current_place -= x;
             }
+            Console.WriteLine("Stock Market current place is {0}.\n", current_place);
         } //done, move the current place of the stock market
         public int Find(int stock_name_num)
         {

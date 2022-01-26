@@ -376,7 +376,7 @@ namespace stock_market
         } //check 1/21
         private int Check_stock(int stock_num, int num) 
         {
-            if(stocks[stock_num] >= num)
+            if(stocks[stock_num-1] >= num)
             {
                 return 1;
             }
@@ -419,8 +419,7 @@ namespace stock_market
                                       "     5) Maytag\n" +
                                       "     6) Gen Mills\n" +
                                       "     7) A.M. Motors\n" +
-                                      "     8) Western Pub\n" +
-                                      "     9) Cancel\n");
+                                      "     8) Western Pub\n");
                     choice = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("How many shares of that stock do you want to sell?\n");
                     num = Convert.ToInt32(Console.ReadLine());
@@ -538,10 +537,6 @@ namespace stock_market
                                 check = 0;
                             }
                             break;
-                        case 9:
-                            Console.WriteLine("Canceling the choice of selling stock.\n");
-                            check = 0;
-                            break;
                         default:
                             Console.WriteLine("Entered wrong number\n");
                             check = 0;
@@ -550,7 +545,7 @@ namespace stock_market
                     if (check == 1)
                     {
                         Show();
-                        Console.WriteLine("You gained %d\n", cost);
+                        Console.WriteLine("You gained {0}\n", cost);
                         check = 0;
                     }
                 }
@@ -693,7 +688,7 @@ namespace stock_market
                             break;
                         case 9:
                             Console.WriteLine("Canceling the choice of selling stock.\n");
-                            check = 0;
+                            check = 2;
                             break;
                         default:
                             Console.WriteLine("Entered wrong number\n");
@@ -703,9 +698,10 @@ namespace stock_market
                     if (check == 1)
                     {
                         Show();
-                        Console.WriteLine("You gained %d\n", cost);
+                        Console.WriteLine("You gained {0}\n", cost);
                     }
                 }
+                check = 0;
             }
             return 0;
         } 

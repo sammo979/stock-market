@@ -52,6 +52,7 @@ namespace stock_market
             {
                 players[x].Ending(sm);
             }
+            sm.Show();
             Console.WriteLine("Thank you for playing!\n");
         }
     }

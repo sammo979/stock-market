@@ -39,7 +39,7 @@ namespace stock_market
                     stock_name_num = -1;
                     direction = -1;
                     movement = -1;
-                    move = -1;
+                    move = 0;
                     meeting = -1;
                     unqiue = 3;
                     break;
@@ -48,7 +48,7 @@ namespace stock_market
                     description = "None\n";
                     div = 4;
                     stock_name_num = 1;
-                    direction = 1;
+                    direction = 1; //down
                     movement = 1;
                     move = 1;
                     meeting = -1;
@@ -57,9 +57,9 @@ namespace stock_market
                 case 3:
                     title = "Western Publishing\n";
                     description = "None\n";
-                    div = 2;
+                    div = 3;
                     stock_name_num = 8;
-                    direction = 2;
+                    direction = 2; //up
                     movement = 1;
                     move = 2;
                     meeting = -1;
@@ -70,7 +70,7 @@ namespace stock_market
                     description = "Purchase Limit One Share\n";
                     div = 2;
                     stock_name_num = 5;
-                    direction = 1;
+                    direction = 1; //down
                     movement = 2;
                     move = 3;
                     meeting = 1;
@@ -82,7 +82,7 @@ namespace stock_market
                     description = "None\n";
                     div = 1;
                     stock_name_num = 3;
-                    direction = 2;
+                    direction = 2; //up
                     movement = 2;
                     move = 4;
                     meeting = -1;
@@ -93,7 +93,7 @@ namespace stock_market
                     description = "Sell all, At $15 Per Share\n";
                     div = -1;
                     stock_name_num = 4;
-                    direction = 1;
+                    direction = 1; //down
                     movement = 2;
                     move = 5;
                     meeting = -1;
@@ -104,7 +104,7 @@ namespace stock_market
                     description = "None\n";
                     div = -2;
                     stock_name_num = -2;
-                    direction = 1;
+                    direction = 1; //down
                     movement = 2;
                     move = 20;
                     meeting = -2;
@@ -115,7 +115,7 @@ namespace stock_market
                     description = "Sell All, At $10 Per Share\n";
                     div = -1;
                     stock_name_num = 8;
-                    direction = 1;
+                    direction = 2; //up
                     movement = 1;
                     move = 5;
                     meeting = -1;
@@ -126,7 +126,7 @@ namespace stock_market
                     description = "None\n";
                     div = 4;
                     stock_name_num = 2;
-                    direction = 1;
+                    direction = 1; //down
                     movement = 1;
                     move = 4;
                     meeting = -1;
@@ -137,7 +137,7 @@ namespace stock_market
                     description = "Purchase Limit One Share\n";
                     div = 3;
                     stock_name_num = 7;
-                    direction = 2;
+                    direction = 2; //up
                     movement = 1;
                     move = 3;
                     meeting = 1;
@@ -149,7 +149,7 @@ namespace stock_market
                     description = "None\n";
                     div = 2;
                     stock_name_num = 5;
-                    direction = 1;
+                    direction = 1; //down
                     movement = 1;
                     move = 2;
                     meeting = -1;
@@ -159,7 +159,7 @@ namespace stock_market
                     description = "None\n";
                     div = 1;
                     stock_name_num = 6;
-                    direction = 2;
+                    direction = 2; //up
                     movement = 1;
                     move = 1;
                     meeting = -1;
@@ -171,16 +171,16 @@ namespace stock_market
                     stock_name_num = -1;
                     direction = -1;
                     movement = -1;
-                    move = -1;
+                    move = 0;
                     meeting = -1;
-                    unqiue = 2;
+                    unqiue = 3;
                     break;
                 case 14:
                     title = "Int. Shoe\n";
                     description = "None\n";
                     div = 1;
                     stock_name_num = 3;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 1;
                     meeting = -1;
@@ -191,7 +191,7 @@ namespace stock_market
                     description = "None\n";
                     div = 2;
                     stock_name_num = 4;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 2;
                     meeting = -1;
@@ -202,7 +202,7 @@ namespace stock_market
                     description = "Purchase Limit One Share\n";
                     div = 3;
                     stock_name_num = 8;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 2;
                     move = 3;
                     meeting = 1;
@@ -214,7 +214,7 @@ namespace stock_market
                     description = "None\n";
                     div = 4;
                     stock_name_num = 1;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 2;
                     move = 4;
                     meeting = -1;
@@ -225,7 +225,7 @@ namespace stock_market
                     description = "Sell All, At $10 Per Share\n";
                     div = -1;
                     stock_name_num = 7;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 2;
                     move = 5;
                     meeting = -1;
@@ -236,7 +236,7 @@ namespace stock_market
                     description = "None\n";
                     div = -2;
                     stock_name_num = -2;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 2;
                     move = 20;
                     meeting = -2;
@@ -247,7 +247,7 @@ namespace stock_market
                     description = "Sell All, At $18 Per Share\n";
                     div = -1;
                     stock_name_num = 3;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 5;
                     meeting = -1;
@@ -258,7 +258,7 @@ namespace stock_market
                     description = "None\n";
                     div = 2;
                     stock_name_num = 5;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 4;
                     meeting = -1;
@@ -269,8 +269,8 @@ namespace stock_market
                     description = "Purchase Limit One Share\n";
                     div = 1;
                     stock_name_num = 6;
-                    direction = 1;
-                    movement = 1;
+                    direction = 1;//down
+                    movement = 1; //left
                     move = 3;
                     meeting = 1;
                     stockhold = new Stockholders_Meeting(6);
@@ -281,8 +281,8 @@ namespace stock_market
                     description = "None\n";
                     div = 4;
                     stock_name_num = 2;
-                    direction = 2;
-                    movement = 1;
+                    direction = 2;//up
+                    movement = 1;//left
                     move = 2;
                     meeting = -1;
                     unqiue = -1;
@@ -292,7 +292,7 @@ namespace stock_market
                     description = "None\n";
                     div = 3;
                     stock_name_num = 7;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 1;
                     meeting = -1;
@@ -305,7 +305,7 @@ namespace stock_market
                     stock_name_num = -1;
                     direction = -1;
                     movement = -1;
-                    move = -1;
+                    move = 0;
                     meeting = -1;
                     unqiue = 3;
                     break;
@@ -314,7 +314,7 @@ namespace stock_market
                     description = "None\n";
                     div = 3;
                     stock_name_num = 8;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 1;
                     meeting = -1;
@@ -325,7 +325,7 @@ namespace stock_market
                     description = "None\n";
                     div = 4;
                     stock_name_num = 1;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 2;
                     meeting = -1;
@@ -334,9 +334,9 @@ namespace stock_market
                 case 28:
                     title = "Int. Shoe\n";
                     description = "Purchase Limit One Share\n";
-                    div = 2;
+                    div = 1;
                     stock_name_num = 3;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 2;
                     move = 3;
                     meeting = 1;
@@ -348,7 +348,7 @@ namespace stock_market
                     description = "None\n";
                     div = 2;
                     stock_name_num = 4;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 2;
                     move = 4;
                     meeting = -1;
@@ -359,7 +359,7 @@ namespace stock_market
                     description = "Sell All, At $18 Per Share\n";
                     div = -1;
                     stock_name_num = 6;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 2;
                     move = 5;
                     meeting = -1;
@@ -370,7 +370,7 @@ namespace stock_market
                     description = "None\n";
                     div = -2;
                     stock_name_num = -2;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 2;
                     move = 20;
                     meeting = -2;
@@ -381,7 +381,7 @@ namespace stock_market
                     description = "Sell All, At $30 Per Share\n";
                     div = -1;
                     stock_name_num = 2;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 5;
                     meeting = -1;
@@ -392,7 +392,7 @@ namespace stock_market
                     description = "None\n";
                     div = 3;
                     stock_name_num = 8;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 4;
                     meeting = -1;
@@ -403,7 +403,7 @@ namespace stock_market
                     description = "Purchase Limit One Share\n";
                     div = 4;
                     stock_name_num = 1;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 3;
                     meeting = 1;
@@ -415,7 +415,7 @@ namespace stock_market
                     description = "None\n";
                     div = 1;
                     stock_name_num = 3;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 2;
                     meeting = -1;
@@ -426,7 +426,7 @@ namespace stock_market
                     description = "None\n";
                     div = 2;
                     stock_name_num = 4;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 1;
                     meeting = -1;
@@ -439,7 +439,7 @@ namespace stock_market
                     stock_name_num = -1;
                     direction = -1;
                     movement = -1;
-                    move = -1;
+                    move = 0;
                     meeting = -1;
                     unqiue = 3;
                     break;
@@ -448,7 +448,7 @@ namespace stock_market
                     description = "None\n";
                     div = 2;
                     stock_name_num = 5;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 1;
                     meeting = -1;
@@ -459,7 +459,7 @@ namespace stock_market
                     description = "None\n";
                     div = 1;
                     stock_name_num = 6;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 2;
                     meeting = -1;
@@ -470,7 +470,7 @@ namespace stock_market
                     description = "Purchase Limit One Share\n";
                     div = 4;
                     stock_name_num = 2;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 2;
                     move = 3;
                     meeting = 1;
@@ -482,7 +482,7 @@ namespace stock_market
                     description = "None\n";
                     div = 3;
                     stock_name_num = 7;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 2;
                     move = 4;
                     meeting = -1;
@@ -493,7 +493,7 @@ namespace stock_market
                     description = "Sell All, At $30 Per Share\n";
                     div = -1;
                     stock_name_num = 1;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 2;
                     move = 5;
                     meeting = -1;
@@ -504,7 +504,7 @@ namespace stock_market
                     description = "None\n";
                     div = -2;
                     stock_name_num = -2;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 2;
                     move = 20;
                     meeting = -2;
@@ -515,7 +515,7 @@ namespace stock_market
                     description = "Sell All, At $15 Per Share\n";
                     div = -1;
                     stock_name_num = 5;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 5;
                     meeting = -1;
@@ -526,7 +526,7 @@ namespace stock_market
                     description = "None\n";
                     div = 1;
                     stock_name_num = 6;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 4;
                     meeting = -1;
@@ -537,7 +537,7 @@ namespace stock_market
                     description = "Purchase Limit One Share\n";
                     div = 2;
                     stock_name_num = 4;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 3;
                     meeting = 1;
@@ -549,7 +549,7 @@ namespace stock_market
                     description = "None\n";
                     div = 3;
                     stock_name_num = 7;
-                    direction = 2;
+                    direction = 2;//up
                     movement = 1;
                     move = 2;
                     meeting = -1;
@@ -560,7 +560,7 @@ namespace stock_market
                     description = "None\n";
                     div = 4;
                     stock_name_num = 2;
-                    direction = 1;
+                    direction = 1;//down
                     movement = 1;
                     move = 1;
                     meeting = -1;

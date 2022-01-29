@@ -30,6 +30,7 @@ namespace stock_market
             Console.WriteLine("Money: {0}\n", money);
             Console.WriteLine("Work Status: {0}\n", work_name);
             Console.WriteLine("Meeting Status(1:yes 2:no): {0}\n", meeting);
+            Console.WriteLine("Position_num: {0}.\n", position_num);
             Console.WriteLine("----------------------\n");
             Console.WriteLine("Stocks: \n");
             Console.WriteLine("        Woolwth: {0}\n", stocks[0]);
@@ -319,31 +320,71 @@ namespace stock_market
                             meeting = 2;
                             //set positon to be the board square that is at the oppiside of the meeting track
                             //move 6 board squares
-                            int number = 6;
-                            while (number > 0)
+                            int number = 0;
+                            while (number == 0)
                             {
-                                if (position.stockhold.move == 1)
+                                switch (position_num)
                                 {
-                                    position_num++;
+                                    case 4:
+                                        //maytag
+                                        position_num = 46;
+                                        position = board[46];
+                                        number = 1;
+                                        break;
+                                    case 10:
+                                        //am motors
+                                        position_num = 16;
+                                        position = board[16];
+                                        number = 1;
+                                        break;
+                                    case 16:
+                                        //western pub
+                                        position_num = 10;
+                                        position = board[10];
+                                        number = 1;
+                                        break;
+                                    case 22:
+                                        //gen mills
+                                        position_num = 28;
+                                        position = board[28];
+                                        number = 1;
+                                        break;
+                                    case 28:
+                                        //int shoe
+                                        position_num = 22;
+                                        position = board[22];
+                                        number = 1;
+                                        break;
+                                    case 34:
+                                        //woolwth
+                                        position_num = 40;
+                                        position = board[40];
+                                        number = 1;
+                                        break;
+                                    case 40:
+                                        //alcoa
+                                        position_num = 34;
+                                        position = board[34];
+                                        number = 1;
+                                        break;
+                                    case 46:
+                                        //j.i. case
+                                        position_num = 4;
+                                        position = board[4];
+                                        number = 1;
+                                        break;
+                                    default:
+                                        //entered the wrong number
+                                        Console.WriteLine("You have entered the wrong number.\n");
+                                        break;
                                 }
-                                else if (position.stockhold.move == 2)
-                                {
-                                    position_num--;
-                                }
-                                if (position_num > 48)
-                                {
-                                    position_num = 1;
-                                }
-                                else if (position_num < 1)
-                                {
-                                    position_num = 48;
-                                }
-                                number--;
                             }
                             //if there is more of the roll left over move that much
                             if (num > 0)
                             {
                                 Move(num);
+                                num = 0;
+                                Console.WriteLine("Position_num is {0}.\n", position_num);
                             }
                         }
                     }
@@ -366,11 +407,13 @@ namespace stock_market
                     // move like normal
                     int num = roll[0] + roll[1];
                     Move(num);
+                    Console.WriteLine("Position_num is {0}.\n", position_num);
                 }
                 else 
                 {
                     int num = roll[0] + roll[1];
                     Move(num);
+                    Console.WriteLine("Position_num is {0}.\n", position_num);
                 }
             }
         } //check 1/21
@@ -711,6 +754,7 @@ namespace stock_market
             while (choice == 0)
             {
                 //show the player the current stock market price for the stock
+                sm.Show();
                 Console.WriteLine("The current price of {0} is {1}\n", position.title, sm.Find(position.stock_name_num));
                 //then ask if they wannt to buy
                 Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", position.title);
@@ -725,7 +769,6 @@ namespace stock_market
                             //and show them the stock market price
                             if (shares == 0)
                             {
-                                sm.Show();
                                 if (position.meeting != 1)
                                 {
                                     Console.WriteLine("How many shares of {0} do you want to buy? Enter a number.\n", position.title);
@@ -878,7 +921,6 @@ namespace stock_market
                             {
                                 Console.WriteLine("Player: {0},{1}, here is where you are on the board.\n", name, color_name);
                                 position.Show();
-
                                 //if the square is a sell all
                                 if (position.unqiue == 1)
                                 {
@@ -966,11 +1008,25 @@ namespace stock_market
                         break;
                     case 2:
                         //Change Jobs or Quit Job, players can do this before rolling only
-                        Change_job();
+                        if (work == 1 || work == 2 || work == 3 || work == 4)
+                        {
+                            Change_job();
+                        }
+                        else if(work == -1)
+                        {
+                            Console.WriteLine("You are not working currently.\n");
+                        }
                         break;
                     case 3:
                         //Sell Stock, a player can only do this before rolling
-                        Sell_stock(sm);
+                        if (meeting == 2)
+                        {
+                            Sell_stock(sm);
+                        }
+                        else if(meeting == 1)
+                        {
+                            Console.WriteLine("You are in a meeting currently which means you can not sell stock");
+                        }
                         break;
                     case 4:
                         //Show Stock Market

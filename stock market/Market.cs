@@ -97,7 +97,7 @@ namespace stock_market
         }
         public void Show()
         {
-            Console.WriteLine("Here is the Stocket Market right now: \n");
+            Console.WriteLine("Here is the Stocket Market right now: {0}\n", current_place);
             Console.WriteLine("------------------\n");
             Console.WriteLine("        Woolwth: {0}\n", woolwth[current_place]);
             Console.WriteLine("        Aloca: {0}\n", aloca[current_place]);
@@ -112,38 +112,6 @@ namespace stock_market
         public Market()
         {
             current_place = 25;
-            /*for (int x = 0; x < 51; x++)
-            {
-                woolwth[x] = 30 + (x * 4);
-                aloca[x] = 230 - (x * 4);
-                if (x == 0)
-                {
-                    intshoe[x] = 18;
-                    gen_mills[x] = 42;
-                }
-                else if (x % 2 == 0)
-                {
-                    intshoe[x] = intshoe[x - 1] + 1;
-                    gen_mills[x] = gen_mills[x - 1] - 1;
-                }
-                else
-                {
-                    intshoe[x] = intshoe[x - 1];
-                    gen_mills[x] = gen_mills[x - 1];
-                }
-                if (x <= 20)
-                {
-                    maytag[x] = 15 + x;
-                    j_i_case[x] = 75 - x;
-                }
-                else
-                {
-                    maytag[x] = maytag[x - 1] + 2;
-                    j_i_case[x] = j_i_case[x - 1] - 2;
-                }
-                am_motors[x] = 110 - (x * 2);
-                western_pub[x] = 10 + (x * 2);
-            }*/
         } //done, calls fill because a new market was created
     }
 }

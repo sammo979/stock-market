@@ -41,7 +41,8 @@ namespace stock_market
             //Console.WriteLine("#   Position_num:               {0}        #\n", PositionNum);//debugging statement
             Console.WriteLine("#------------------------------------------#\n");
             Console.WriteLine("#   Currently on this Square:              #\n");
-            Position.Show();
+            if (Position != null)
+            { Position.Show(); }
             Console.WriteLine("#------------------------------------------#\n");
             Console.WriteLine("#   Stocks:                                #\n");
             Console.WriteLine("#       Woolwth:     {0}                   #\n", Stocks[0]);

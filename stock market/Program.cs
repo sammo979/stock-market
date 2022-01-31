@@ -10,7 +10,9 @@ namespace stock_market
             //intallizing variables
             int end_game = 0, x, size, total, working;
             Market sm = new Market();//making an instance of the class market to use for the game
-            Console.WriteLine("Welcome to Stock Market the board game!\n");
+            Console.WriteLine("############################################\n");
+            Console.WriteLine("#                                          #\n");
+            Console.WriteLine("# Welcome to Stock Market the board game!  #\n");
             // finding out the number of players
             Console.WriteLine("How many players are going to play?\n"); 
             size = Convert.ToInt32(Console.ReadLine());

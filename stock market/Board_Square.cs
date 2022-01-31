@@ -29,13 +29,11 @@ namespace stock_market
             Console.WriteLine("Meeting: {0}\n",Meeting);
             */
             // better looking show for players
-            Console.WriteLine("##########################################\n" +
-                              "#                                        #\n" +
+            Console.WriteLine("#                                        #\n" +
                               "#                   {0}                  #\n" +
                               "#                   {1}                  #\n" +
                               "#                   {2}                  #\n" +
-                              "#                                        #\n" +
-                              "##########################################\n", Title, Description, Div);
+                              "#                                        #\n", Title, Description, Div);
 
         } 
         public Board_Square(int num)

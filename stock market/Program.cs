@@ -30,7 +30,7 @@ namespace stock_market
                 if (total >= 100000)
                 {
                     Console.WriteLine("Player: {0}, {1}, you have just won Stock Market Board Game!!!!!!!\n" +
-                        "Ending with a total of {2}!\n", players[x].name, players[x].color_name, total);
+                        "Ending with a total of {2}!\n", players[x].Name, players[x].ColorName, total);
                     end_game = 1;
                 }
                 else

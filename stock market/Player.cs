@@ -19,10 +19,10 @@ namespace stock_market
         public int position_num; // the current postion num in the array
         public int stockhold_num = -2; // num to show where the player is in the stockhold, -2 not in , -1 in but haven't moved
         private readonly Board_Square[] board = new Board_Square[49];
-        private readonly Start_Board Prospector = new Start_Board(1);
-        private readonly Start_Board Policeman = new Start_Board(2);
-        private readonly Start_Board Doctor = new Start_Board(3);
-        private readonly Start_Board Deep_Sea_Diver = new Start_Board(4);
+        private readonly Start_Board_Square Prospector = new Start_Board_Square(1);
+        private readonly Start_Board_Square Policeman = new Start_Board_Square(2);
+        private readonly Start_Board_Square Doctor = new Start_Board_Square(3);
+        private readonly Start_Board_Square Deep_Sea_Diver = new Start_Board_Square(4);
         private void Show()
         {
             Console.WriteLine("{0}, {1}, here is your stats\n", color_name, name);
@@ -278,12 +278,12 @@ namespace stock_market
             while (num > 0)
             {
                 //going to the left
-                if (position.movement == 1)
+                if (position.PlayerMovement == 1)
                 {
                     position_num--;
                 }
                 //going to the right
-                else if (position.movement == 2)
+                else if (position.PlayerMovement == 2)
                 {
                     position_num++;
                 }
@@ -396,13 +396,13 @@ namespace stock_market
                     if ((roll[0] + roll[1]) % 2 == 0)
                     {
                         //move the direction of the even arrow, move right
-                        position.movement = 2;
+                        position.PlayerMovement = 2;
                     }
                     //if the roll was odd
                     else
                     {
                         //move the direction of the odd arrow, move left
-                        position.movement = 1;
+                        position.PlayerMovement = 1;
                     }
                     // move like normal
                     int num = roll[0] + roll[1];
@@ -432,17 +432,17 @@ namespace stock_market
         {
             int choice = 0, cost=0, num, check=0;
             //forced selling
-            if (position.unqiue == 1)
+            if (position.Type == 1)
             {
-                num = stocks[position.stock_name_num - 1];
+                num = stocks[position.StockNameNum - 1];
                 //cost =         lowest stock market price   * the number of shares the player has of that stock
-                cost = sm.Find_base(position.stock_name_num) * num;
+                cost = sm.Find_base(position.StockNameNum) * num;
                 //add the money the player made by selling to their money var
                 money += cost;
                 //reset the stock var to show that they do not have any shares of the stock they just sold
-                stocks[position.stock_name_num - 1] = 0;
+                stocks[position.StockNameNum - 1] = 0;
                 //display the information to the player
-                Console.WriteLine("You had {0} shares of {1}, selling those share(s) you gained {2}", num, position.title, cost);
+                Console.WriteLine("You had {0} shares of {1}, selling those share(s) you gained {2}", num, position.Title, cost);
             }
             //broke selling
             else if(money <= 0)
@@ -620,7 +620,7 @@ namespace stock_market
                         case 1:
                             if (Check_stock(1, num) == 1)
                             {
-                                cost = num * sm.woolwth[sm.current_place];
+                                cost = num * sm.Woolwth[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[0] -= num;
                                 check = 1;
@@ -634,7 +634,7 @@ namespace stock_market
                         case 2:
                             if (Check_stock(2, num) == 1)
                             {
-                                cost = num * sm.aloca[sm.current_place];
+                                cost = num * sm.Aloca[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[1] -= num;
                                 check = 1;
@@ -648,7 +648,7 @@ namespace stock_market
                         case 3:
                             if (Check_stock(3, num) == 1)
                             {
-                                cost = num * sm.intshoe[sm.current_place];
+                                cost = num * sm.IntShoe[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[2] -= num;
                                 check = 1;
@@ -662,7 +662,7 @@ namespace stock_market
                         case 4:
                             if (Check_stock(4, num) == 1)
                             {
-                                cost = num * sm.j_i_case[sm.current_place];
+                                cost = num * sm.JICase[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[3] -= num;
                                 check = 1;
@@ -676,7 +676,7 @@ namespace stock_market
                         case 5:
                             if (Check_stock(5, num) == 1)
                             {
-                                cost = num * sm.maytag[sm.current_place];
+                                cost = num * sm.Maytag[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[4] -= num;
                                 check = 1;
@@ -690,7 +690,7 @@ namespace stock_market
                         case 6:
                             if (Check_stock(6, num) == 1)
                             {
-                                cost = num * sm.gen_mills[sm.current_place];
+                                cost = num * sm.GenMills[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[5] -= num;
                                 check = 1;
@@ -704,7 +704,7 @@ namespace stock_market
                         case 7:
                             if (Check_stock(7, num) == 1)
                             {
-                                cost = num * sm.am_motors[sm.current_place];
+                                cost = num * sm.AmMotors[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[6] -= num;
                                 check = 1;
@@ -718,7 +718,7 @@ namespace stock_market
                         case 8:
                             if (Check_stock(8, num) == 1)
                             {
-                                cost = num * sm.western_pub[sm.current_place];
+                                cost = num * sm.WesternPub[sm.CurrentPlaceMarket];
                                 money += cost;
                                 stocks[7] -= num;
                                 check = 1;
@@ -755,9 +755,9 @@ namespace stock_market
             {
                 //show the player the current stock market price for the stock
                 sm.Show();
-                Console.WriteLine("The current price of {0} is {1}\n", position.title, sm.Find(position.stock_name_num));
+                Console.WriteLine("The current price of {0} is {1}\n", position.Title, sm.Find(position.StockNameNum));
                 //then ask if they wannt to buy
-                Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", position.title);
+                Console.WriteLine("Do you want to buy shares of {0}? Yes(1) or No(2)\n", position.Title);
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -769,9 +769,9 @@ namespace stock_market
                             //and show them the stock market price
                             if (shares == 0)
                             {
-                                if (position.meeting != 1)
+                                if (position.Meeting != 1)
                                 {
-                                    Console.WriteLine("How many shares of {0} do you want to buy? Enter a number.\n", position.title);
+                                    Console.WriteLine("How many shares of {0} do you want to buy? Enter a number.\n", position.Title);
                                     shares = Convert.ToInt32(Console.ReadLine());
                                 }
                                 else
@@ -780,7 +780,7 @@ namespace stock_market
                                 }
                             }
                             //calcuate the current price of the stock that the player wants to buy
-                            current_price = sm.Find(position.stock_name_num);
+                            current_price = sm.Find(position.StockNameNum);
                             //cost = the # of stock the players wants to buy * the current stock price from the stock market
                             cost = shares * current_price;
                             //check if the player can afford to pay
@@ -789,7 +789,7 @@ namespace stock_market
                                 //tell the player they can not afford the number of share they ask to buy
                                 Console.WriteLine("You do not have enough money to buy the amount of shares that you wanted.\n");
                                 //if they are on a stock holders meeting square and can't afford to buy one share, exit the loop and tell them they can't afford it
-                                if (position.meeting == 1)
+                                if (position.Meeting == 1)
                                 {
                                     Console.WriteLine("You can only buy one share because you are on a stockholders meeting entance square, but do not have enough money to buy one share.\n");
                                     bought = 1;
@@ -809,9 +809,9 @@ namespace stock_market
                                 money -= cost;
                                 //add the right amount of shares to the players stock
                                 //stocks[position.stock_name_num - 1] = stocks[position.stock_name_num - 1] + shares;
-                                stocks[position.stock_name_num - 1] += shares;
+                                stocks[position.StockNameNum - 1] += shares;
                                 //show the player what happen
-                                Console.WriteLine("Player: {0}, {1}, you wanted to buy {2} shares of {3}, with the current stock price of {4}, which will cost you {5}.\n", name, color_name, shares, position.title, current_price, cost); //input string was not in a correct format
+                                Console.WriteLine("Player: {0}, {1}, you wanted to buy {2} shares of {3}, with the current stock price of {4}, which will cost you {5}.\n", name, color_name, shares, position.Title, current_price, cost); //input string was not in a correct format
                                 Show();
                                 //set bought to 1 to break the while loop
                                 bought = 1;
@@ -911,10 +911,10 @@ namespace stock_market
                             //if they are in stockholder meeting track
                             if (stockhold_num >= -1)
                             {
-                                Console.WriteLine("Player: {0},{1}, you landed on {2} for 1 in the stockholders meeting.\n", name, color_name, position.stockhold.stockholder[stockhold_num]);
-                                int add = stocks[position.stock_name_num - 1] * position.stockhold.stockholder[stockhold_num];
-                                stocks[position.stock_name_num - 1] += add;
-                                Console.WriteLine("You have gained, {0} shares! Now you have {1} shares.\n", add, stocks[position.stock_name_num - 1]);
+                                Console.WriteLine("Player: {0},{1}, you landed on {2} for 1 in the stockholders meeting.\n", name, color_name, position.Stockhold.stockholder[stockhold_num]);
+                                int add = stocks[position.StockNameNum - 1] * position.Stockhold.stockholder[stockhold_num];
+                                stocks[position.StockNameNum - 1] += add;
+                                Console.WriteLine("You have gained, {0} shares! Now you have {1} shares.\n", add, stocks[position.StockNameNum - 1]);
                             }
                             //if they are not actively in stockholder meeting track
                             else if (stockhold_num == -2)
@@ -922,7 +922,7 @@ namespace stock_market
                                 Console.WriteLine("Player: {0},{1}, here is where you are on the board.\n", name, color_name);
                                 position.Show();
                                 //if the square is a sell all
-                                if (position.unqiue == 1)
+                                if (position.Type == 1)
                                 {
                                     Sell_stock(sm);
                                     //move the stock market
@@ -930,7 +930,7 @@ namespace stock_market
                                     Show();
                                 }
                                 //broker fee
-                                else if (position.unqiue == 2)
+                                else if (position.Type == 2)
                                 {
                                     Broker_fee();
                                     Broke(sm);
@@ -939,7 +939,7 @@ namespace stock_market
                                     Show();
                                 }
                                 //100 fee
-                                else if (position.unqiue == 3)
+                                else if (position.Type == 3)
                                 {
                                     Console.WriteLine("You landed on a $100 fee square.\n");
                                     money -= 100;
@@ -952,17 +952,17 @@ namespace stock_market
                                     //move the stock market
                                     sm.Move(position);
                                     //check if the player gets a div
-                                    if (stocks[position.stock_name_num-1] > 0)
+                                    if (stocks[position.StockNameNum -1] > 0)
                                     {
                                         // ( div           *    the amount of stock the player has )
-                                        money += (position.div * stocks[position.stock_name_num-1]);
-                                        Console.WriteLine("Player: {0},{1} you got {2} in dividends\n", name, color_name, (position.div * stocks[position.stock_name_num-1]) );
+                                        money += (position.Div * stocks[position.StockNameNum -1]);
+                                        Console.WriteLine("Player: {0},{1} you got {2} in dividends\n", name, color_name, (position.Div * stocks[position.StockNameNum -1]) );
                                         Show();
                                     }
                                     //give the player the option to buy
                                     Buy_stock(sm);
                                     //ask if the player wants to go inot the stockholders meeting
-                                    if (position.meeting == 1)
+                                    if (position.Meeting == 1)
                                     {
                                         choice = 0;
                                         while (choice == 0)
@@ -974,7 +974,7 @@ namespace stock_market
                                                 case 1:
                                                     //check if the player can go into the meeting,
                                                     //check if they have at least one stock of the stock meeting they are wanting to go into
-                                                    if (stocks[position.stock_name_num - 1] > 0)
+                                                    if (stocks[position.StockNameNum - 1] > 0)
                                                     {
                                                         //go into the meeting 
                                                         meeting = 1;

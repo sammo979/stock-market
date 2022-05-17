@@ -19,21 +19,21 @@ namespace stock_market
         
         public void Show()
         {
-            //a show for debugging purposes
-            /*Console.WriteLine("Title: {0}\n",Title);
+            //display
+            Console.WriteLine("Title: {0}\n",Title);
             Console.WriteLine("Description: {0}\n", Description);
             Console.WriteLine("Div: {0}\n",Div);
             Console.WriteLine("Direction: {0}\n", StockDirection);
             Console.WriteLine("Move: {0}\n", StockMove);
             Console.WriteLine("Movement: {0}\n",PlayerMovement);
             Console.WriteLine("Meeting: {0}\n",Meeting);
-            */
-            // better looking show for players
+            
+            /*// better looking show for players
             Console.WriteLine("#                                        #\n" +
                               "#                   {0}                  #\n" +
                               "#                   {1}                  #\n" +
                               "#                   {2}                  #\n" +
-                              "#                                        #\n", Title, Description, Div);
+                              "#                                        #\n", Title, Description, Div);*/
 
         } 
         public Board_Square(int num)

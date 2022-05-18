@@ -1,2 +1,2 @@
 # Stock-market
-C# program of the Stock Market Game
+C# program of the Stock Market Board Game 1968
